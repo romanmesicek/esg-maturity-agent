@@ -1,4 +1,4 @@
-# Company Sustainability Agent
+# ESG Maturity Agent
 
 AI-Agent zur Nachhaltigkeitsanalyse von Unternehmen basierend auf dem Ainsbury-Grayson 5-Stages-of-Maturity-Modell.
 
@@ -31,10 +31,10 @@ Der Agent analysiert Unternehmen anhand von 11 Kategorien und bewertet sie auf e
 ## Projektstruktur
 
 ```
-company-sustainability-agent/
+esg-maturity-agent/
 ├── .claude/
 │   └── agents/
-│       └── sustainability-analysis-agent.md
+│       └── esg-maturity-agent.md
 ├── source/                    # Referenzmaterial
 ├── templates/                 # HTML-Report-Templates
 ├── input/                     # Kundenmaterial (lokal)
@@ -51,10 +51,10 @@ Der Agent wird als eigenständige Session im Terminal gestartet:
 
 ```bash
 # Agent direkt starten
-claude --agent sustainability-analysis-agent
+claude --agent esg-maturity-agent
 
 # Oder innerhalb einer Claude Code Session
-/agent sustainability-analysis-agent
+/agent esg-maturity-agent
 ```
 
 Dann den Prompt eingeben:

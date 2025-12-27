@@ -1,4 +1,4 @@
-# Company Sustainability Agent
+# ESG Maturity Agent
 
 ## Project Overview
 
@@ -81,10 +81,10 @@ The model provides specific indicators for what each stage looks like across:
 ## Project Structure
 
 ```
-company-sustainability-agent/
+esg-maturity-agent/
 ├── .claude/
 │   ├── agents/
-│   │   └── sustainability-analysis-agent.md # Hauptagent für Nachhaltigkeitsanalyse
+│   │   └── esg-maturity-agent.md            # Hauptagent für Nachhaltigkeitsanalyse
 │   └── settings.json                        # Auto-Approval Konfiguration
 ├── source/                                  # Referenzmaterial
 │   ├── ainsbury_grayson_referenz.md         # Komplettreferenz mit Appendices
@@ -106,10 +106,10 @@ Der Agent wird als eigenständige Session im Terminal gestartet:
 
 ```bash
 # Agent direkt starten
-claude --agent sustainability-analysis-agent
+claude --agent esg-maturity-agent
 
 # Oder innerhalb einer Claude Code Session
-/agent sustainability-analysis-agent
+/agent esg-maturity-agent
 ```
 
 Beispiel-Prompt:
