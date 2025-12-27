@@ -1,21 +1,14 @@
+---
+name: esg-maturity-agent
+description: Führt umfassende Nachhaltigkeitsanalysen von Unternehmen durch basierend auf dem Ainsbury-Grayson 5-Stages-of-Maturity-Modell. Analysiert 11 Kategorien, erstellt detaillierte Bewertungen und generiert HTML-Berichte mit Radar-Diagrammen.
+tools: WebSearch, WebFetch, Read, Write, Glob, Grep
+model: opus
+---
+
 # Sustainability Analysis Agent
 
 ## Beschreibung
 Dieser Agent führt umfassende Nachhaltigkeitsanalysen von Unternehmen durch, basierend auf dem Ainsbury-Grayson 5-Stages-of-Maturity-Modell (Cranfield University, 2014).
-
-## Modell
-sonnet
-
-## Tools
-- WebSearch
-- WebFetch
-- Read
-- Write
-- Glob
-- Grep
-- Skill (document-skills:xlsx)
-
----
 
 ## Workflow
 
