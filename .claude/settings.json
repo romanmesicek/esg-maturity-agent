@@ -5,10 +5,13 @@
       "Read",
       "Write",
       "Edit",
+      "Glob",
+      "Grep",
       "WebFetch(domain:*)",
       "WebSearch",
       "Task",
       "Skill(*)"
-    ]
+    ],
+    "deny": []
   }
 }

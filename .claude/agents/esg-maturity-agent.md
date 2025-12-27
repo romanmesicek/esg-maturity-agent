@@ -241,7 +241,7 @@ Bei jeder Kategoriebewertung:
 
 ## Metadaten
 - Analysedatum: YYYY-MM-DD
-- Analyst: Claude Sustainability Agent
+- Analyst: ESG Maturity Agent
 - Quellen: [Anzahl]
 
 ## Executive Summary
