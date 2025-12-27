@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nachhaltigkeitsanalyse: {{FIRMENNAME}}</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --stage-1: #e74c3c;
+            --stage-2: #e67e22;
+            --stage-3: #f1c40f;
+            --stage-4: #27ae60;
+            --stage-5: #2ecc71;
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --light: #ecf0f1;
+            --border: #bdc3c7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background: #fff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        @media print {
+            body {
+                padding: 20px;
+                max-width: none;
+            }
+            .no-print {
+                display: none;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+
+        header {
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--secondary);
+        }
+
+        .meta {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: var(--primary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 10px;
+            margin: 40px 0 20px 0;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+        }
+
+        h4 {
+            font-size: 1.1em;
+            color: var(--primary);
+            margin: 20px 0 10px 0;
+        }
+
+        .executive-summary {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        /* Großes Radar-Diagramm am Anfang */
+        .radar-hero {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .radar-hero h2 {
+            border: none;
+            margin-top: 0;
+        }
+
+        .radar-hero-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .detail-table th,
+        .detail-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .detail-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .detail-table tr:hover {
+            background: var(--light);
+        }
+
+        .detail-table td.reasoning {
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .score-badge {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: bold;
+            color: white;
+        }
+
+        .score-1 { background: var(--stage-1); }
+        .score-2 { background: var(--stage-2); }
+        .score-3 { background: var(--stage-3); color: var(--primary); }
+        .score-4 { background: var(--stage-4); }
+        .score-5 { background: var(--stage-5); }
+
+        .confidence {
+            font-size: 0.8em;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .confidence-high { background: #d4edda; color: #155724; }
+        .confidence-medium { background: #fff3cd; color: #856404; }
+        .confidence-low { background: #f8d7da; color: #721c24; }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .analysis-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .analysis-card h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .strengths-title {
+            color: #27ae60;
+            font-weight: 600;
+            margin: 15px 0 10px 0;
+        }
+
+        .weaknesses-title {
+            color: #e74c3c;
+            font-weight: 600;
+            margin: 15px 0 10px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .strengths li::before { color: #27ae60; }
+        .weaknesses li::before { color: #e74c3c; }
+
+        /* Erweiterter Branchenvergleich */
+        .benchmark-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .benchmark-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        .benchmark-table th,
+        .benchmark-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .benchmark-table th {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .benchmark-subsection {
+            margin: 25px 0;
+        }
+
+        .benchmark-subsection h4 {
+            color: var(--secondary);
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        .sources {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        .sources ol {
+            padding-left: 20px;
+        }
+
+        .sources li {
+            padding: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .sources a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .sources a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid var(--light);
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nachhaltigkeitsanalyse</h1>
+        <div class="subtitle">{{FIRMENNAME}}</div>
+        <div class="meta">
+            <span>Analysedatum: {{DATUM}}</span>
+            <span>Analyst: Claude Sustainability Agent v3</span>
+            <span>Quellen: {{ANZAHL_QUELLEN}}</span>
+        </div>
+    </header>
+
+    <section class="executive-summary">
+        <h2>Executive Summary</h2>
+        <p>{{EXECUTIVE_SUMMARY}}</p>
+    </section>
+
+    <!-- Unternehmensprofil -->
+    <section>
+        <h2>Unternehmensprofil</h2>
+        <table class="detail-table">
+            <tbody>
+                {{UNTERNEHMENSPROFIL_ROWS}}
+            </tbody>
+        </table>
+
+        <h3>Nachhaltigkeitsstrategie</h3>
+        {{NACHHALTIGKEITSSTRATEGIE}}
+    </section>
+
+    <!-- Großes Radar-Diagramm am Anfang -->
+    <section class="radar-hero">
+        <h2>Ainsbury-Grayson Nachhaltigkeitsprofil</h2>
+        <div class="radar-hero-container">
+            <canvas id="radarChart"></canvas>
+        </div>
+        <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+            Bewertung nach dem 5-Stages-of-Maturity-Modell (1 = Denier, 5 = Champion)
+        </p>
+    </section>
+
+    <section class="page-break">
+        <h2>Detailbewertung nach Kategorien</h2>
+        <table class="detail-table">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">Nr</th>
+                    <th style="width: 20%;">Kategorie</th>
+                    <th style="width: 8%;">Score</th>
+                    <th style="width: 15%;">Stage</th>
+                    <th style="width: 8%;">Konfidenz</th>
+                    <th style="width: 44%;">Begründung</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{DETAIL_ROWS}}
+            </tbody>
+        </table>
+
+        <!-- Stärken und Entwicklungspotenziale -->
+        <div class="analysis-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 30px;">
+            <div class="analysis-card" style="border-color: #27ae60;">
+                <h4 style="color: #27ae60;">Top 3 Stärken</h4>
+                <ol class="strengths" style="list-style: decimal; padding-left: 20px;">
+                    {{TOP_STAERKEN}}
+                </ol>
+            </div>
+            <div class="analysis-card" style="border-color: #e67e22;">
+                <h4 style="color: #e67e22;">Top 3 Entwicklungspotenziale</h4>
+                <ol class="weaknesses" style="list-style: decimal; padding-left: 20px;">
+                    {{TOP_ENTWICKLUNGSPOTENZIALE}}
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Qualitative Analyse</h2>
+        <div class="analysis-grid">
+            <div class="analysis-card">
+                <h4>Strategie</h4>
+                <div class="strengths-title">Stärken</div>
+                <ul class="strengths">
+                    {{STRATEGIE_STAERKEN}}
+                </ul>
+                <div class="weaknesses-title">Schwächen</div>
+                <ul class="weaknesses">
+                    {{STRATEGIE_SCHWAECHEN}}
+                </ul>
+            </div>
+            <div class="analysis-card">
+                <h4>Prozesse</h4>
+                <div class="strengths-title">Stärken</div>
+                <ul class="strengths">
+                    {{PROZESSE_STAERKEN}}
+                </ul>
+                <div class="weaknesses-title">Schwächen</div>
+                <ul class="weaknesses">
+                    {{PROZESSE_SCHWAECHEN}}
+                </ul>
+            </div>
+            <div class="analysis-card">
+                <h4>Kommunikation</h4>
+                <div class="strengths-title">Stärken</div>
+                <ul class="strengths">
+                    {{KOMMUNIKATION_STAERKEN}}
+                </ul>
+                <div class="weaknesses-title">Schwächen</div>
+                <ul class="weaknesses">
+                    {{KOMMUNIKATION_SCHWAECHEN}}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="benchmark-section">
+        <h2>Branchenvergleich</h2>
+
+        <div class="benchmark-subsection">
+            <h4>Brancheneinordnung</h4>
+            <p>{{BRANCHENEINORDNUNG}}</p>
+        </div>
+
+        <div class="benchmark-subsection">
+            <h4>Vergleichsunternehmen</h4>
+            <table class="benchmark-table">
+                <thead>
+                    <tr>
+                        <th>Unternehmen</th>
+                        <th>Region</th>
+                        <th>Größe</th>
+                        <th>Nachhaltigkeits-Highlights</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{VERGLEICHSUNTERNEHMEN_ROWS}}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="benchmark-subsection">
+            <h4>Positionierung im Wettbewerb</h4>
+            {{POSITIONIERUNG_WETTBEWERB}}
+        </div>
+
+        <div class="benchmark-subsection">
+            <h4>Branchenspezifische Herausforderungen</h4>
+            {{BRANCHENSPEZIFISCHE_HERAUSFORDERUNGEN}}
+        </div>
+
+        <div class="benchmark-subsection">
+            <h4>Best Practices der Branche</h4>
+            {{BEST_PRACTICES}}
+        </div>
+    </section>
+
+    <section class="sources">
+        <h2>Quellen</h2>
+        <ol>
+            {{QUELLEN_LISTE}}
+        </ol>
+    </section>
+
+    <footer>
+        <p>Analyse basierend auf dem Ainsbury-Grayson 5-Stages-of-Maturity-Modell</p>
+        <p>Doughty Centre for Corporate Responsibility, Cranfield University (2014)</p>
+        <p>Programmierung und Optimierung: Roman Mesicek | <a href="https://www.mesicek.com" target="_blank">www.mesicek.com</a></p>
+        <p>Generiert mit Claude Sustainability Analysis Agent v3</p>
+    </footer>
+
+    <script>
+        // Radar Chart Configuration
+        const ctx = document.getElementById('radarChart').getContext('2d');
+
+        // Kategorie-Labels (gekürzt für Lesbarkeit)
+        const labels = [
+            'Purpose & Strategy',
+            'Leadership',
+            'Board Governance',
+            'Targets & Incentives',
+            'Business Units',
+            'Employees',
+            'Value Chain',
+            'Skills & Training',
+            'Stakeholder Comm.',
+            'Partnerships',
+            'CR Function'
+        ];
+
+        // Bewertungsdaten - werden durch den Agent ersetzt
+        const scores = [{{RADAR_SCORES}}]; // z.B. [3, 4, 3, 2, 3, 4, 3, 2, 4, 3, 3]
+
+        // Dynamische Farbe basierend auf Scores
+        function getScoreColor(scores) {
+            const colors = scores.map(s => {
+                if (s <= 1.5) return 'rgba(231, 76, 60, 0.7)';
+                if (s <= 2.5) return 'rgba(230, 126, 34, 0.7)';
+                if (s <= 3.5) return 'rgba(241, 196, 15, 0.7)';
+                return 'rgba(39, 174, 96, 0.7)';
+            });
+            // Durchschnittsfarbe
+            const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+            if (avg < 2) return 'rgba(231, 76, 60, 0.7)';
+            if (avg < 3) return 'rgba(230, 126, 34, 0.7)';
+            if (avg < 4) return 'rgba(241, 196, 15, 0.7)';
+            return 'rgba(39, 174, 96, 0.7)';
+        }
+
+        const chartColor = getScoreColor(scores);
+
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '{{FIRMENNAME}}',
+                    data: scores,
+                    fill: true,
+                    backgroundColor: chartColor.replace('0.7', '0.2'),
+                    borderColor: chartColor,
+                    pointBackgroundColor: chartColor,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: chartColor,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: true,
+                            color: '#ddd'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 5,
+                        ticks: {
+                            stepSize: 1,
+                            font: {
+                                size: 12
+                            },
+                            backdropColor: 'transparent'
+                        },
+                        pointLabels: {
+                            font: {
+                                size: 13,
+                                weight: '500'
+                            }
+                        },
+                        grid: {
+                            color: '#e0e0e0'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const stageNames = ['', 'Denier', 'Complier', 'Risk Mitigator', 'Opportunity Maximiser', 'Champion'];
+                                const score = context.raw;
+                                return `Score: ${score} (${stageNames[Math.round(score)]})`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

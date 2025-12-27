@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Source - nur spezifische Dateien erlaubt
+source/*
+!source/README.md
+!source/ainsbury_grayson_referenz.md
+!source/ainsbury_grayson_top-level_categories.md
+
+# Output - Verzeichnis behalten, Inhalte nie hochladen
+output/*
+!output/README.md
+
+# Input - Kundenmaterial lokal behalten
+input/*
+!input/README.md
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
