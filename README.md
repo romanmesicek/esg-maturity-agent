@@ -45,28 +45,27 @@ esg-maturity-agent/
 
 ## Verwendung
 
-### Im Terminal (Claude Code CLI)
-
-Der Agent wird als eigenständige Session im Terminal gestartet:
+### Option 1: Eigenständige Session (Terminal)
 
 ```bash
-# Agent direkt starten
 claude --agent esg-maturity-agent
-
-# Oder innerhalb einer Claude Code Session
-/agent esg-maturity-agent
 ```
 
 Dann den Prompt eingeben:
-
 ```
 Führe eine Nachhaltigkeitsanalyse für [Firmenname] durch.
 Branche: [Branche]
 ```
 
-### In der IDE (VS Code Extension)
+### Option 2: Innerhalb einer Claude Code Session
 
-In der VS Code Extension kann der Agent nicht direkt über das Task-Tool aufgerufen werden, da lokale Custom Agents (`.claude/agents/`) als eigenständige Sessions konzipiert sind. Der Analyse-Workflow kann aber manuell oder über den Terminal-Aufruf durchgeführt werden.
+Einfach den gewünschten Task beschreiben - Claude Code delegiert automatisch an den Agent:
+
+```
+Führe eine Nachhaltigkeitsanalyse für [Firmenname] durch.
+```
+
+> **Hinweis:** Der `/agent` Befehl funktioniert nur zum Starten neuer Sessions im Terminal, nicht innerhalb einer laufenden Session.
 
 ## Output
 

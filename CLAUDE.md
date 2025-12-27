@@ -102,22 +102,21 @@ esg-maturity-agent/
 ## Sustainability Analysis Agent
 
 ### Aufruf
-Der Agent wird als eigenständige Session im Terminal gestartet:
 
+**Option 1: Eigenständige Session (Terminal)**
 ```bash
-# Agent direkt starten
 claude --agent esg-maturity-agent
-
-# Oder innerhalb einer Claude Code Session
-/agent esg-maturity-agent
 ```
 
-Beispiel-Prompt:
+**Option 2: Innerhalb einer Claude Code Session**
+Einfach den gewünschten Task beschreiben - Claude Code delegiert automatisch an den Agent:
 ```
 Führe eine Nachhaltigkeitsanalyse für [Firmenname] durch.
 Branche: [Branche]
 Fokus: [optional: spezifische Schwerpunkte]
 ```
+
+> **Hinweis:** Der `/agent` Befehl funktioniert nur zum Starten neuer Sessions, nicht innerhalb einer laufenden Session. Innerhalb einer Session wird der Agent automatisch basierend auf seiner Beschreibung verwendet.
 
 ### Workflow (5 Phasen)
 
