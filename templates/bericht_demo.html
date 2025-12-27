@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nachhaltigkeitsanalyse: Muster GmbH</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --stage-1: #e74c3c;
+            --stage-2: #e67e22;
+            --stage-3: #f1c40f;
+            --stage-4: #27ae60;
+            --stage-5: #2ecc71;
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --light: #ecf0f1;
+            --border: #bdc3c7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background: #fff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        @media print {
+            body {
+                padding: 20px;
+                max-width: none;
+            }
+            .no-print {
+                display: none;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+
+        header {
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--secondary);
+        }
+
+        .meta {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .demo-badge {
+            background: var(--stage-3);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: var(--primary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 10px;
+            margin: 40px 0 20px 0;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+        }
+
+        h4 {
+            font-size: 1.1em;
+            color: var(--primary);
+            margin: 20px 0 10px 0;
+        }
+
+        .executive-summary {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        /* Großes Radar-Diagramm am Anfang */
+        .radar-hero {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .radar-hero h2 {
+            border: none;
+            margin-top: 0;
+        }
+
+        .radar-hero-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .detail-table th,
+        .detail-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .detail-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .detail-table tr:hover {
+            background: var(--light);
+        }
+
+        .detail-table td.reasoning {
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .score-badge {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: bold;
+            color: white;
+        }
+
+        .score-1 { background: var(--stage-1); }
+        .score-2 { background: var(--stage-2); }
+        .score-3 { background: var(--stage-3); color: var(--primary); }
+        .score-4 { background: var(--stage-4); }
+        .score-5 { background: var(--stage-5); }
+
+        .confidence {
+            font-size: 0.8em;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .confidence-high { background: #d4edda; color: #155724; }
+        .confidence-medium { background: #fff3cd; color: #856404; }
+        .confidence-low { background: #f8d7da; color: #721c24; }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .analysis-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .analysis-card h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .strengths-title {
+            color: #27ae60;
+            font-weight: 600;
+            margin: 15px 0 10px 0;
+        }
+
+        .weaknesses-title {
+            color: #e74c3c;
+            font-weight: 600;
+            margin: 15px 0 10px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .strengths li::before { color: #27ae60; }
+        .weaknesses li::before { color: #e74c3c; }
+
+        /* Erweiterter Branchenvergleich */
+        .benchmark-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .benchmark-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        .benchmark-table th,
+        .benchmark-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .benchmark-table th {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .benchmark-subsection {
+            margin: 25px 0;
+        }
+
+        .benchmark-subsection h4 {
+            color: var(--secondary);
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        .sources {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        .sources ol {
+            padding-left: 20px;
+        }
+
+        .sources li {
+            padding: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .sources a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .sources a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid var(--light);
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nachhaltigkeitsanalyse</h1>
+        <div class="subtitle">Muster GmbH</div>
+        <div class="demo-badge">DEMO-BEISPIEL</div>
+        <div class="meta">
+            <span>Analysedatum: 27. Dezember 2025</span>
+            <span>Analyst: Claude Sustainability Agent v3</span>
+            <span>Quellen: 12</span>
+        </div>
+    </header>
+
+    <section class="executive-summary">
+        <h2>Executive Summary</h2>
+        <p><strong>Muster GmbH</strong> ist ein mittelständisches österreichisches Dienstleistungsunternehmen mit rund 1.200 Mitarbeitenden und einem Jahresumsatz von ca. 850 Mio. EUR. Das Unternehmen befindet sich im Ainsbury-Grayson Reifegrad-Modell auf <strong>Stage 3 (Risk Mitigator)</strong> mit einem Gesamtdurchschnitt von <strong>3,2 Punkten</strong>. Nachhaltigkeit wird als strategisches Risikomanagement-Thema verstanden, mit ersten systematischen Ansätzen zur Chancennutzung. Besondere Stärken zeigen sich in der Führungsverankerung und Mitarbeitereinbindung, während bei Value-Chain-Integration und wissenschaftsbasierten Zielen noch Entwicklungspotenzial besteht.</p>
+    </section>
+
+    <!-- Unternehmensprofil -->
+    <section>
+        <h2>Unternehmensprofil</h2>
+        <table class="detail-table">
+            <tbody>
+                <tr><td><strong>Unternehmen</strong></td><td>Muster GmbH</td></tr>
+                <tr><td><strong>Branche</strong></td><td>Dienstleistungen / Business Services</td></tr>
+                <tr><td><strong>Hauptsitz</strong></td><td>Wien, Österreich</td></tr>
+                <tr><td><strong>Gründungsjahr</strong></td><td>1985</td></tr>
+                <tr><td><strong>Mitarbeitende</strong></td><td>~1.200</td></tr>
+                <tr><td><strong>Umsatz (2024)</strong></td><td>~850 Mio. EUR</td></tr>
+                <tr><td><strong>Rechtsform</strong></td><td>GmbH</td></tr>
+                <tr><td><strong>Eigentümerstruktur</strong></td><td>Familiengeführt (75%), Management (25%)</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Nachhaltigkeitsstrategie</h3>
+        <p style="font-style: italic; background: #f8f9fa; padding: 15px; border-left: 4px solid var(--primary); margin: 15px 0;">
+            "Nachhaltigkeit ist für uns kein Trend, sondern gelebte Verantwortung gegenüber Gesellschaft und Umwelt. Wir verstehen wirtschaftlichen Erfolg und ökologische Verantwortung als zwei Seiten derselben Medaille."
+        </p>
+        <p><strong>Kernelemente der Strategie:</strong></p>
+        <ul>
+            <li>Integration von ESG-Kriterien in Geschäftsentscheidungen seit 2020</li>
+            <li>Klimaneutralität der eigenen Betriebe bis 2030</li>
+            <li>Fokus auf Mitarbeiterentwicklung und Diversität</li>
+            <li>Schrittweiser Ausbau der Lieferketten-Transparenz</li>
+        </ul>
+    </section>
+
+    <!-- Großes Radar-Diagramm am Anfang -->
+    <section class="radar-hero">
+        <h2>Ainsbury-Grayson Nachhaltigkeitsprofil</h2>
+        <div class="radar-hero-container">
+            <canvas id="radarChart"></canvas>
+        </div>
+        <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+            Bewertung nach dem 5-Stages-of-Maturity-Modell (1 = Denier, 5 = Champion)
+        </p>
+    </section>
+
+    <section class="page-break">
+        <h2>Detailbewertung nach Kategorien</h2>
+        <table class="detail-table">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">Nr</th>
+                    <th style="width: 20%;">Kategorie</th>
+                    <th style="width: 8%;">Score</th>
+                    <th style="width: 15%;">Stage</th>
+                    <th style="width: 8%;">Konfidenz</th>
+                    <th style="width: 44%;">Begründung</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Purpose, Vision, Values & Strategy</td>
+                    <td><span class="score-badge score-4">4</span></td>
+                    <td>Opportunity Maximiser</td>
+                    <td><span class="confidence confidence-high">Hoch</span></td>
+                    <td class="reasoning">Nachhaltigkeit ist explizit in Unternehmenswerten und Strategie verankert. Klare Vision bis 2030 mit messbaren Meilensteinen. ESG-Integration in strategische Entscheidungsprozesse seit 2020 etabliert.</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Tone from the Top: Leadership</td>
+                    <td><span class="score-badge score-4">4</span></td>
+                    <td>Opportunity Maximiser</td>
+                    <td><span class="confidence confidence-high">Hoch</span></td>
+                    <td class="reasoning">Geschäftsführung kommuniziert regelmäßig zu Nachhaltigkeitsthemen. CEO persönlich in Brancheninitiativen aktiv. Führungskräfte haben Nachhaltigkeitsziele in ihren Zielvereinbarungen.</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Board Oversight and Governance</td>
+                    <td><span class="score-badge score-3">3</span></td>
+                    <td>Risk Mitigator</td>
+                    <td><span class="confidence confidence-medium">Mittel</span></td>
+                    <td class="reasoning">Aufsichtsrat erhält quartalsweise ESG-Reports. Nachhaltigkeitsrisiken im Risikomanagement integriert. Eigener Nachhaltigkeitsausschuss bisher nicht eingerichtet, jedoch regelmäßiger Tagesordnungspunkt.</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Key Targets, Incentives and Measurement</td>
+                    <td><span class="score-badge score-3">3</span></td>
+                    <td>Risk Mitigator</td>
+                    <td><span class="confidence confidence-medium">Mittel</span></td>
+                    <td class="reasoning">Umwelt-KPIs werden systematisch erfasst und berichtet. Klimaziele definiert, jedoch noch nicht SBTi-validiert. Variable Vergütung mit 10% ESG-Anteil für oberes Management eingeführt.</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Embedded in Strategic Business Units</td>
+                    <td><span class="score-badge score-3">3</span></td>
+                    <td>Risk Mitigator</td>
+                    <td><span class="confidence confidence-medium">Mittel</span></td>
+                    <td class="reasoning">Nachhaltigkeitskriterien in einigen Geschäftsbereichen operationalisiert. Unterschiedliche Reifegrade zwischen Abteilungen. Pilotprojekte zur Integration in Produktentwicklung laufen.</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Engaging Employees</td>
+                    <td><span class="score-badge score-4">4</span></td>
+                    <td>Opportunity Maximiser</td>
+                    <td><span class="confidence confidence-high">Hoch</span></td>
+                    <td class="reasoning">Aktives Nachhaltigkeits-Botschafter-Programm mit über 80 Mitarbeitenden. Regelmäßige Schulungen und interne Kommunikation. Mitarbeiter-Ideen-Plattform für Nachhaltigkeitsinitiativen etabliert.</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Energising the Value Chain</td>
+                    <td><span class="score-badge score-2">2</span></td>
+                    <td>Complier</td>
+                    <td><span class="confidence confidence-medium">Mittel</span></td>
+                    <td class="reasoning">Lieferanten-Verhaltenskodex eingeführt, aber systematische Überprüfung noch im Aufbau. Scope-3-Emissionen teilweise erfasst. Zusammenarbeit mit Kunden bei Nachhaltigkeitsthemen punktuell.</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Skills, Knowledge Management and Training</td>
+                    <td><span class="score-badge score-3">3</span></td>
+                    <td>Risk Mitigator</td>
+                    <td><span class="confidence confidence-medium">Mittel</span></td>
+                    <td class="reasoning">Basis-Nachhaltigkeitsschulung für alle Mitarbeitenden. Fachspezifische Weiterbildungen für relevante Funktionen. Wissensmanagement-System im Aufbau, noch nicht vollständig etabliert.</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Stakeholder Engagement, Communications</td>
+                    <td><span class="score-badge score-3">3</span></td>
+                    <td>Risk Mitigator</td>
+                    <td><span class="confidence confidence-high">Hoch</span></td>
+                    <td class="reasoning">Jährlicher Nachhaltigkeitsbericht nach GRI Standards. Regelmäßiger Stakeholder-Dialog durchgeführt. Wesentlichkeitsanalyse aktualisiert. Website mit ausführlichem Nachhaltigkeitsbereich.</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Collaborations, Partnerships and Networks</td>
+                    <td><span class="score-badge score-3">3</span></td>
+                    <td>Risk Mitigator</td>
+                    <td><span class="confidence confidence-high">Hoch</span></td>
+                    <td class="reasoning">Mitglied in relevanten Branchenverbänden und UN Global Compact. Teilnahme an regionalen Nachhaltigkeitsinitiativen. Strategische Partnerschaften für Innovationsprojekte im Aufbau.</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Specialist CR Function</td>
+                    <td><span class="score-badge score-3">3</span></td>
+                    <td>Risk Mitigator</td>
+                    <td><span class="confidence confidence-high">Hoch</span></td>
+                    <td class="reasoning">Dedizierte Nachhaltigkeitsabteilung mit 3 Vollzeit-Mitarbeitenden. Berichtet direkt an Geschäftsführung. Verantwortlich für Strategie, Reporting und Koordination, jedoch begrenzte Ressourcen für tiefergehende Projekte.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Stärken und Entwicklungspotenziale -->
+        <div class="analysis-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 30px;">
+            <div class="analysis-card" style="border-color: #27ae60;">
+                <h4 style="color: #27ae60;">Top 3 Stärken</h4>
+                <ol class="strengths" style="list-style: decimal; padding-left: 20px;">
+                    <li><strong>Führungsverankerung:</strong> Starkes Commitment der Geschäftsführung mit persönlichem Engagement und klarer Kommunikation zu Nachhaltigkeitsthemen</li>
+                    <li><strong>Mitarbeiterengagement:</strong> Erfolgreiches Botschafter-Programm und hohe Beteiligung der Belegschaft an Nachhaltigkeitsinitiativen</li>
+                    <li><strong>Strategische Integration:</strong> Nachhaltigkeitsstrategie mit klaren Zielen bis 2030 und Integration in Unternehmenswerte</li>
+                </ol>
+            </div>
+            <div class="analysis-card" style="border-color: #e67e22;">
+                <h4 style="color: #e67e22;">Top 3 Entwicklungspotenziale</h4>
+                <ol class="weaknesses" style="list-style: decimal; padding-left: 20px;">
+                    <li><strong>Value-Chain-Integration:</strong> Systematische Einbindung von Lieferanten und Kunden in Nachhaltigkeitsaktivitäten noch unterentwickelt</li>
+                    <li><strong>Wissenschaftsbasierte Ziele:</strong> Klimaziele sollten durch SBTi validiert werden, um Glaubwürdigkeit zu erhöhen</li>
+                    <li><strong>Governance-Strukturen:</strong> Etablierung eines dedizierten Nachhaltigkeitsausschusses im Aufsichtsrat empfohlen</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Qualitative Analyse</h2>
+        <div class="analysis-grid">
+            <div class="analysis-card">
+                <h4>Strategie</h4>
+                <div class="strengths-title">Stärken</div>
+                <ul class="strengths">
+                    <li>Klare Nachhaltigkeitsvision mit 2030-Horizont</li>
+                    <li>Integration in Unternehmensstrategie</li>
+                    <li>Messbare Meilensteine definiert</li>
+                </ul>
+                <div class="weaknesses-title">Schwächen</div>
+                <ul class="weaknesses">
+                    <li>Scope-3-Strategie noch lückenhaft</li>
+                    <li>Biodiversitätsaspekte unterrepräsentiert</li>
+                    <li>Langfristige Transformationspfade noch zu konkretisieren</li>
+                </ul>
+            </div>
+            <div class="analysis-card">
+                <h4>Prozesse</h4>
+                <div class="strengths-title">Stärken</div>
+                <ul class="strengths">
+                    <li>Systematisches ESG-Datenmanagement</li>
+                    <li>Etablierte Umweltmanagementsysteme</li>
+                    <li>Regelmäßige interne Audits</li>
+                </ul>
+                <div class="weaknesses-title">Schwächen</div>
+                <ul class="weaknesses">
+                    <li>Lieferantenaudits noch nicht flächendeckend</li>
+                    <li>Digitalisierung der Nachhaltigkeitsprozesse ausbaufähig</li>
+                    <li>Unterschiedliche Prozessreife zwischen Standorten</li>
+                </ul>
+            </div>
+            <div class="analysis-card">
+                <h4>Kommunikation</h4>
+                <div class="strengths-title">Stärken</div>
+                <ul class="strengths">
+                    <li>Transparenter jährlicher Nachhaltigkeitsbericht</li>
+                    <li>Aktive interne Kommunikation</li>
+                    <li>Regelmäßiger Stakeholder-Dialog</li>
+                </ul>
+                <div class="weaknesses-title">Schwächen</div>
+                <ul class="weaknesses">
+                    <li>Social-Media-Präsenz zu Nachhaltigkeitsthemen ausbaufähig</li>
+                    <li>Externe Kommunikation über Erfolge zurückhaltend</li>
+                    <li>Zielgruppenspezifische Ansprache verbesserungswürdig</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="benchmark-section">
+        <h2>Branchenvergleich</h2>
+
+        <div class="benchmark-subsection">
+            <h4>Brancheneinordnung</h4>
+            <p>Im österreichischen Dienstleistungssektor positioniert sich Muster GmbH im oberen Mittelfeld. Mit einem Gesamtscore von 3,2 liegt das Unternehmen über dem Branchendurchschnitt von ca. 2,8, jedoch noch deutlich hinter den Branchenführern mit Scores über 4,0. Die mittelständische Struktur und das Familienunternehmen-Ethos bieten gute Voraussetzungen für authentische Nachhaltigkeitsentwicklung.</p>
+        </div>
+
+        <div class="benchmark-subsection">
+            <h4>Vergleichsunternehmen</h4>
+            <table class="benchmark-table">
+                <thead>
+                    <tr>
+                        <th>Unternehmen</th>
+                        <th>Region</th>
+                        <th>Größe</th>
+                        <th>Nachhaltigkeits-Highlights</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Branchenführer A</td>
+                        <td>DACH</td>
+                        <td>Groß</td>
+                        <td>SBTi-validiert, RE100-Mitglied, integrierter Bericht</td>
+                    </tr>
+                    <tr>
+                        <td>Vergleichsunternehmen B</td>
+                        <td>Österreich</td>
+                        <td>Mittel</td>
+                        <td>Klimaneutral seit 2023, starkes Mitarbeiterengagement</td>
+                    </tr>
+                    <tr>
+                        <td>Vergleichsunternehmen C</td>
+                        <td>Deutschland</td>
+                        <td>Mittel</td>
+                        <td>Umfassendes Lieferkettenmanagement, B Corp zertifiziert</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="benchmark-subsection">
+            <h4>Positionierung im Wettbewerb</h4>
+            <p>Muster GmbH zeigt in den Bereichen <strong>Leadership-Verankerung</strong> und <strong>Mitarbeiterengagement</strong> überdurchschnittliche Performance. Im Vergleich zu direkten Wettbewerbern besteht Nachholbedarf bei der <strong>Value-Chain-Integration</strong> und bei <strong>wissenschaftsbasierten Klimazielen</strong>. Das Unternehmen hat das Potenzial, durch gezielte Investitionen in diese Bereiche in die Spitzengruppe aufzusteigen.</p>
+        </div>
+
+        <div class="benchmark-subsection">
+            <h4>Branchenspezifische Herausforderungen</h4>
+            <ul>
+                <li>Scope-3-Emissionen in Dienstleistungsunternehmen oft schwer messbar</li>
+                <li>Hohe Abhängigkeit von Mitarbeiter-Engagement und -Verhalten</li>
+                <li>Digitalisierung als Chance und Herausforderung für Nachhaltigkeit</li>
+                <li>Steigende regulatorische Anforderungen durch CSRD und EU-Taxonomie</li>
+            </ul>
+        </div>
+
+        <div class="benchmark-subsection">
+            <h4>Best Practices der Branche</h4>
+            <ul>
+                <li><strong>Wissenschaftsbasierte Ziele:</strong> SBTi-Validierung als Glaubwürdigkeitsnachweis</li>
+                <li><strong>Integriertes Reporting:</strong> Zusammenführung von Finanz- und Nachhaltigkeitsberichterstattung</li>
+                <li><strong>Lieferketten-Transparenz:</strong> Digitale Tools für Lieferanten-Assessment</li>
+                <li><strong>Mitarbeiter-Engagement:</strong> Nachhaltigkeits-Ziele in individuelle Leistungsbeurteilungen</li>
+                <li><strong>Kreislaufwirtschaft:</strong> Circular Economy-Prinzipien in Beschaffung und Betrieb</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="sources">
+        <h2>Quellen</h2>
+        <ol>
+            <li>Muster GmbH Nachhaltigkeitsbericht 2023/24</li>
+            <li>Muster GmbH Geschäftsbericht 2024</li>
+            <li>Website: nachhaltigkeit.muster-gmbh.at (Beispiel-Domain)</li>
+            <li>UN Global Compact Communication on Progress</li>
+            <li>Branchenverband Nachhaltigkeitsranking 2024</li>
+            <li>EcoVadis Bewertung (Bronze-Status)</li>
+            <li>CDP Climate Change Response (Score C)</li>
+            <li>Pressemitteilungen und Medienberichte 2024</li>
+            <li>Stakeholder-Befragung Ergebnisse 2024</li>
+            <li>Wesentlichkeitsanalyse 2023</li>
+            <li>Strategiedokumente (öffentlich zugänglich)</li>
+            <li>Interview-Notizen Nachhaltigkeitsmanagement</li>
+        </ol>
+        <p style="margin-top: 15px; font-style: italic; color: #666;">
+            Hinweis: Dies ist ein fiktives Demo-Unternehmen zur Illustration der Analysemethodik.
+            Alle Daten sind anonymisiert und aus realen Analysen gemischt.
+        </p>
+    </section>
+
+    <footer>
+        <p>Analyse basierend auf dem Ainsbury-Grayson 5-Stages-of-Maturity-Modell</p>
+        <p>Doughty Centre for Corporate Responsibility, Cranfield University (2014)</p>
+        <p>Programmierung und Optimierung: Roman Mesicek | <a href="https://www.mesicek.com" target="_blank">www.mesicek.com</a></p>
+        <p>Generiert mit Claude Sustainability Analysis Agent v3</p>
+    </footer>
+
+    <script>
+        // Radar Chart Configuration
+        const ctx = document.getElementById('radarChart').getContext('2d');
+
+        // Kategorie-Labels (gekürzt für Lesbarkeit)
+        const labels = [
+            'Purpose & Strategy',
+            'Leadership',
+            'Board Governance',
+            'Targets & Incentives',
+            'Business Units',
+            'Employees',
+            'Value Chain',
+            'Skills & Training',
+            'Stakeholder Comm.',
+            'Partnerships',
+            'CR Function'
+        ];
+
+        // Bewertungsdaten
+        const scores = [4, 4, 3, 3, 3, 4, 2, 3, 3, 3, 3];
+
+        // Dynamische Farbe basierend auf Scores
+        function getScoreColor(scores) {
+            const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+            if (avg < 2) return 'rgba(231, 76, 60, 0.7)';
+            if (avg < 3) return 'rgba(230, 126, 34, 0.7)';
+            if (avg < 4) return 'rgba(241, 196, 15, 0.7)';
+            return 'rgba(39, 174, 96, 0.7)';
+        }
+
+        const chartColor = getScoreColor(scores);
+
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Muster GmbH',
+                    data: scores,
+                    fill: true,
+                    backgroundColor: chartColor.replace('0.7', '0.2'),
+                    borderColor: chartColor,
+                    pointBackgroundColor: chartColor,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: chartColor,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: true,
+                            color: '#ddd'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 5,
+                        ticks: {
+                            stepSize: 1,
+                            font: {
+                                size: 12
+                            },
+                            backdropColor: 'transparent'
+                        },
+                        pointLabels: {
+                            font: {
+                                size: 13,
+                                weight: '500'
+                            }
+                        },
+                        grid: {
+                            color: '#e0e0e0'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const stageNames = ['', 'Denier', 'Complier', 'Risk Mitigator', 'Opportunity Maximiser', 'Champion'];
+                                const score = context.raw;
+                                return `Score: ${score} (${stageNames[Math.round(score)]})`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
