@@ -1,4 +1,4 @@
-# Company Sustainability Agent v3
+# Company Sustainability Agent
 
 AI-Agent zur Nachhaltigkeitsanalyse von Unternehmen basierend auf dem Ainsbury-Grayson 5-Stages-of-Maturity-Modell.
 
