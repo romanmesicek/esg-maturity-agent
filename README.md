@@ -1,6 +1,10 @@
 # ESG Maturity Agent
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 AI-Agent zur Nachhaltigkeitsanalyse von Unternehmen basierend auf dem Ainsbury-Grayson 5-Stages-of-Maturity-Modell.
+
+Der Agent führt automatisierte Web-Recherche durch, bewertet Unternehmen anhand von 11 Kategorien und generiert umfassende HTML-Berichte mit interaktiven Radar-Diagrammen. Eine wissenschaftlich fundierte **Communication Bias Adjustierung** korrigiert systematische positive Verzerrungen in der Unternehmenskommunikation.
 
 ## Funktionsweise
 
@@ -28,18 +32,40 @@ Der Agent analysiert Unternehmen anhand von 11 Kategorien und bewertet sie auf e
 10. Collaborations, Partnerships and Sustainability Networks
 11. Specialist CR Function
 
+## Communication Bias Adjustierung
+
+Forschung zeigt systematische positive Verzerrung in Unternehmenskommunikation:
+- 94% der Investoren glauben, dass Nachhaltigkeitsberichte unbelegte Behauptungen enthalten (PwC, 2023)
+- 42-53% der Umweltaussagen sind vage, irreführend oder unbegründet (EU-Kommission, 2020)
+- Selbstberichtete Emissionen sind typischerweise 10-14% niedriger als extern verifizierte Werte (MIT Sloan, 2024)
+
+Der Agent wendet daher eine transparente Bias-Adjustierung an:
+
+| Faktor | Adjustment |
+|--------|------------|
+| Keine externe Prüfung | -0.5 Punkte |
+| Limited Assurance | -0.25 Punkte |
+| Je identifiziertem Red Flag | -0.25 Punkte |
+
+**Red Flags:** Vage Ziele, Disclosure-Performance Gap, übermäßig positive Sprache, fehlende Scope 3 Daten, Net-Zero ohne Pfad, inkonsistente Aussagen, fehlende Negativberichterstattung, überwiegend Absichtserklärungen.
+
 ## Projektstruktur
 
 ```
 esg-maturity-agent/
 ├── .claude/
 │   └── agents/
-│       └── esg-maturity-agent.md
-├── source/                    # Referenzmaterial
-├── templates/                 # HTML-Report-Templates
-├── input/                     # Kundenmaterial (lokal)
-├── output/                    # Generierte Berichte (lokal)
-├── CLAUDE.md                  # Agent-Dokumentation
+│       └── esg-maturity-agent.md   # Agent-Definition
+├── skills/
+│   └── esg-maturity/               # Skill für Claude Code
+│       ├── SKILL.md
+│       └── references/
+├── source/                         # Referenzmaterial (lokal)
+├── templates/                      # HTML-Report-Templates
+├── input/                          # Kundenmaterial (lokal)
+├── output/                         # Generierte Berichte (lokal)
+├── CLAUDE.md                       # Detaillierte Dokumentation
+├── LICENSE                         # MIT License
 └── README.md
 ```
 
@@ -72,6 +98,11 @@ Führe eine Nachhaltigkeitsanalyse für [Firmenname] durch.
 - `analyse_roh.md` - Rohdaten und Volltext
 - `analyse_bericht.html` - Formatierter Bericht mit interaktivem Radar-Diagramm
 
+Die Berichte enthalten:
+- **Rohpunktzahl und adjustierte Punktzahl** für jede Kategorie
+- **Bias-Analyse Zusammenfassung** mit Verifizierungsniveau und identifizierten Red Flags
+- **Kommunikationsqualitäts-Rating** (Hoch/Mittel/Niedrig)
+
 ### Demo-Beispiel
 
 Ein Beispiel-Bericht für ein anonymes Musterunternehmen ist verfügbar:
@@ -88,9 +119,22 @@ Dieses Demo zeigt alle Funktionen des generierten Berichts:
 
 ## Akademische Grundlage
 
-Basierend auf:
-- Ainsbury, R. & Grayson, D. (2014). *The 5 Stages of Corporate Responsibility*. Doughty Centre for Corporate Responsibility, Cranfield University.
+**Maturity Model:**
+- Ainsbury, R. & Grayson, D. (2014). *Business Critical: Understanding a Company's Current and Desired Stages of Corporate Responsibility Maturity*. Doughty Centre for Corporate Responsibility, Cranfield University.
+
+**Communication Bias Adjustierung:**
+- Berg, F., Kolbel, J. F., & Rigobon, R. (2022). Aggregate confusion: The divergence of ESG ratings. *Review of Finance*.
+- PwC (2023). Global Investor Survey.
+- European Commission (2020). Consumer market study on environmental claims.
+- MIT Sloan (2024). Third-party auditors in carbon reporting.
+- Nature Climate Change (2025). Widespread revisions of self-reported emissions.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+You are free to use, modify, and distribute this software for any purpose, including commercial applications.
 
 ---
 
-**Programmierung und Optimierung:** Roman Mesicek | [www.mesicek.com](https://www.mesicek.com)
+**Entwicklung:** Roman Mesicek | [www.mesicek.com](https://www.mesicek.com)

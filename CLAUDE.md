@@ -86,17 +86,25 @@ esg-maturity-agent/
 │   ├── agents/
 │   │   └── esg-maturity-agent.md            # Hauptagent für Nachhaltigkeitsanalyse
 │   └── settings.json                        # Auto-Approval Konfiguration
-├── source/                                  # Referenzmaterial
+├── skills/
+│   └── esg-maturity/                        # Skill für Claude Code Sessions
+│       ├── SKILL.md                         # Skill-Definition (englisch)
+│       └── references/
+│           └── ainsbury_grayson_framework.md
+├── source/                                  # Referenzmaterial (lokal, nicht im Repo)
 │   ├── ainsbury_grayson_referenz.md         # Komplettreferenz mit Appendices
-│   └── ainsbury_grayson_top-level_categories.md
+│   ├── ainsbury_grayson_top-level_categories.md
+│   └── [weitere Forschungsmaterialien]
 ├── templates/                               # HTML-Report-Templates
 │   ├── bericht_template.html                # HTML-Template mit Radar-Diagramm
 │   └── bericht_demo.html                    # Demo-Bericht (Muster GmbH)
-├── input/                                   # Kundenmaterial für Analysen
+├── input/                                   # Kundenmaterial für Analysen (lokal)
 │   └── README.md                            # Anleitung für Input-Materialien
-├── output/                                  # Generierte Analyseberichte
+├── output/                                  # Generierte Analyseberichte (lokal)
 │   └── README.md
-└── CLAUDE.md                                # Diese Dokumentation
+├── CLAUDE.md                                # Diese Dokumentation
+├── LICENSE                                  # MIT License
+└── README.md                                # Projekt-Übersicht
 ```
 
 ## Sustainability Analysis Agent
@@ -139,6 +147,15 @@ Jede Kategoriebewertung enthält eine Konfidenz-Markierung:
 - **[Mittel]**: Einige Evidenz, nicht vollständig verifizierbar
 - **[Niedrig]**: Wenig direkte Evidenz, Bewertung basiert auf Inferenz
 
+### Communication Bias Adjustierung
+
+Der Agent wendet eine wissenschaftlich fundierte Bias-Korrektur an, um systematische positive Verzerrungen in der Unternehmenskommunikation auszugleichen. Details zur Methodik siehe `.claude/agents/esg-maturity-agent.md` (Phase 3b).
+
+**Kurzübersicht:**
+- Verifizierungsniveau-Adjustment: 0 bis -0.5 Punkte
+- Red Flag-Adjustments: je -0.25 Punkte
+- Transparente Dokumentation von Roh- und adjustierten Punktzahlen
+
 ## Input-Ordner
 
 Für jede Analyse können Kundenmaterialien in `input/[firmenname]/` bereitgestellt werden:
@@ -152,3 +169,7 @@ Siehe `input/README.md` für detaillierte Anleitung.
 ## Output Directory
 
 `output/` - Directory for generated analysis reports and assessments
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
