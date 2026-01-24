@@ -30,10 +30,52 @@ Führe systematische Recherche durch:
 
 ### Phase 3: Ainsbury-Grayson Bewertung
 Bewerte jede der 11 Kategorien anhand der Kriterien (siehe unten).
-- Vergib Punktzahl 1-5 pro Kategorie
+- Vergib **Rohpunktzahl 1-5** pro Kategorie (basierend auf Unternehmenskommunikation)
 - **Ausführliche Begründung**: Dokumentiere Evidenz und Begründung mit 3-5 Sätzen pro Kategorie. Nenne konkrete Beispiele, Zertifizierungen, Initiativen, Zitate oder Kennzahlen.
 - Markiere Konfidenz: [Hoch], [Mittel], [Niedrig]
 - **Kein Durchschnitt berechnen** - die Einzelbewertungen sind aussagekräftiger
+- **Wende Bias-Adjustierung an** (siehe Phase 3b)
+
+### Phase 3b: Communication Bias Adjustierung
+
+**Hintergrund**: Forschung zeigt systematische positive Verzerrung in Unternehmenskommunikation:
+- 94% der Investoren glauben, dass Nachhaltigkeitsberichte unbelegte Behauptungen enthalten (PwC, 2023)
+- 42-53% der Umweltaussagen sind vage, irreführend oder unbegründet (EU-Kommission)
+- Selbstberichtete Emissionen sind typischerweise 10-14% niedriger als extern verifizierte Werte
+- ~60% der ESG-Scores basieren auf Versprechen, nur ~40% auf tatsächlicher Performance
+
+**Schritt 1: Verifizierungsniveau prüfen**
+
+| Verifizierungsgrad | Adjustment |
+|-------------------|------------|
+| Reasonable Assurance (extern, umfassend) | 0.0 |
+| Limited Assurance (extern, begrenzt) | -0.25 |
+| Keine externe Prüfung / Nur selbstberichtet | -0.5 |
+
+**Schritt 2: Red Flags identifizieren (je -0.25 Punkte)**
+
+| Red Flag | Beschreibung | Betroffene Kategorien |
+|----------|--------------|----------------------|
+| **Vage Ziele** | Keine quantifizierten Targets, unspezifische Zeitrahmen | K4 (Targets), K1 (Strategy) |
+| **Disclosure-Performance Gap** | Viel Kommunikation, wenig messbare Ergebnisse | K9 (Communications), alle |
+| **Übermäßig positive Sprache** | Marketing-Ton ohne Substanz, keine Schwächen genannt | K9 (Communications) |
+| **Fehlende Scope 3 Daten** | Keine/minimale Value-Chain-Emissionen berichtet | K7 (Value Chain) |
+| **Net-Zero ohne Pfad** | Klimaneutralitätsziel ohne konkreten Dekarbonisierungsplan | K1 (Strategy), K4 (Targets) |
+| **Inkonsistente Aussagen** | Widersprüche zwischen Bericht, Website, Presse | Alle betroffenen |
+| **Fehlende Negativberichterstattung** | Keine Misserfolge, Herausforderungen oder Rückschläge erwähnt | K9 (Communications) |
+| **Aspirational vs. Substantive** | Überwiegend Absichtserklärungen statt Maßnahmen | Alle betroffenen |
+
+**Schritt 3: Adjustierte Punktzahl berechnen**
+
+```
+Adjustierte Punktzahl = Rohpunktzahl + Verifizierungs-Adjustment + (Σ Red Flags × -0.25)
+Minimum: 1.0 | Maximum: 5.0
+```
+
+**Schritt 4: Transparenz sicherstellen**
+- Dokumentiere Rohpunktzahl UND adjustierte Punktzahl
+- Liste alle angewandten Adjustments mit Begründung
+- Vermerke spezifische Evidenz für jeden Red Flag
 
 ### Phase 4: Qualitative Analyse
 Analysiere Stärken und Schwächen in drei Dimensionen mit jeweils 4-6 Punkten pro Bereich:
@@ -257,16 +299,36 @@ Bei jeder Kategoriebewertung:
 Für jede Kategorie ausführliche Bewertung mit 3-5 Sätzen Begründung:
 
 #### 1. Purpose, Vision, Values & Strategy
-**Bewertung: X/5 | Stage: [Name] | Konfidenz: [H/M/N]**
+**Rohpunktzahl: X/5 → Adjustiert: Y/5 | Stage: [Name] | Konfidenz: [H/M/N]**
 
 [Ausführliche Begründung mit konkreten Beispielen, Zitaten, Initiativen. Mindestens 3-5 Sätze.]
 
+**Bias-Adjustierung:** [Falls angewandt: Verifizierungsniveau (-0.X), Red Flags (Liste mit je -0.25)]
+
 #### 2. Tone from the Top: Leadership
-**Bewertung: X/5 | Stage: [Name] | Konfidenz: [H/M/N]**
+**Rohpunktzahl: X/5 → Adjustiert: Y/5 | Stage: [Name] | Konfidenz: [H/M/N]**
 
 [Ausführliche Begründung...]
 
+**Bias-Adjustierung:** [Falls angewandt...]
+
 [... weitere Kategorien analog ...]
+
+### Bias-Analyse Zusammenfassung
+
+**Verifizierungsniveau:** [Reasonable/Limited/Keine Assurance]
+**Gesamtzahl identifizierter Red Flags:** X
+**Durchschnittliche Adjustierung:** -X.XX Punkte
+
+| Red Flag | Kategorie(n) | Evidenz |
+|----------|--------------|---------|
+| [Name] | K1, K4 | [Kurzbeschreibung] |
+| ... | ... | ... |
+
+**Gesamtbewertung der Kommunikationsqualität:** [Hoch/Mittel/Niedrig]
+- Hoch: ≤2 Red Flags, externe Assurance
+- Mittel: 3-4 Red Flags oder nur Limited Assurance
+- Niedrig: ≥5 Red Flags oder keine Assurance
 
 ### Stärken (Top 3)
 1. ...
@@ -341,10 +403,13 @@ Der HTML-Bericht wird basierend auf dem Template in `templates/bericht_template.
 - Unternehmensprofil mit allen Kennzahlen
 - Nachhaltigkeitsstrategie mit Zitaten und Kernelementen
 - Top 3 Stärken und Entwicklungspotenziale (prominent dargestellt)
-- Vollständige Detailbewertung aller 11 Kategorien
+- Vollständige Detailbewertung aller 11 Kategorien (mit Roh- UND adjustierten Punktzahlen)
+- **Bias-Analyse Zusammenfassung** (Verifizierungsniveau, Red Flags, Kommunikationsqualität)
 - Qualitative Analyse (Strategie, Prozesse, Kommunikation)
 - Ausführlicher Branchenvergleich mit Wettbewerbern
 - Quellenverzeichnis
+
+**Radar-Diagramm**: Zeigt die **adjustierten** Punktzahlen (nicht Rohwerte)
 
 ---
 
@@ -365,3 +430,12 @@ Berücksichtige bei der Analyse branchenspezifische Faktoren:
 Basierend auf:
 - Ainsbury, R. & Grayson, D. (2014): "Business Critical: Understanding a Company's Current and Desired Stages of Corporate Responsibility Maturity", Doughty Centre for Corporate Responsibility, Cranfield University
 - ESRS (European Sustainability Reporting Standards) Framework
+
+### Bias-Adjustierung basierend auf:
+- Berg, F., Kolbel, J. F., & Rigobon, R. (2022). Aggregate confusion: The divergence of ESG ratings. *Review of Finance, 26*(6), 1315-1344.
+- PwC (2023). Global Investor Survey: 94% of investors believe corporate sustainability reporting contains unsupported claims.
+- European Commission (2020). Consumer market study on environmental claims: 42-53% vague, misleading or unfounded.
+- MIT Sloan (2024). Third-party verified emissions typically 9.5-13.7% higher than self-reported.
+- Nature Climate Change (2025). 58% of public firms' emissions later revised; understated more than twice as common.
+- Ferro et al. (2025). Uncovering ESG Ratings: ~60% based on aspirational promises, ~40% on actual performance.
+- Yu et al. (2020). Greenwashing measurement: Disclosure-Performance Gap methodology.
