@@ -111,13 +111,11 @@ Führe eine Nachhaltigkeitsanalyse für [Firmenname] durch.
 
 ## Output
 
-- `analyse_roh.md` - Rohdaten und Volltext
-- `analyse_bericht.html` - Formatierter Bericht mit interaktivem Radar-Diagramm
+Der Agent generiert in `output/[firmenname]_[datum]/`:
 
-Die Berichte enthalten:
-- **Rohpunktzahl und adjustierte Punktzahl** für jede Kategorie
-- **Bias-Analyse Zusammenfassung** mit Verifizierungsniveau und identifizierten Red Flags
-- **Kommunikationsqualitäts-Rating** (Hoch/Mittel/Niedrig)
+- `[firmenname]_analyse_roh.md` - Rohdaten, Rechercheergebnisse und quantitative Bias-Analyse
+- `[firmenname]_greenwashing_screening.md` - Separates Greenwashing-Screening mit Red Flag-Analyse
+- `[firmenname]_analyse_bericht.html` - Formatierter Bericht mit interaktivem Radar-Diagramm
 
 ### Demo-Beispiel
 
@@ -135,15 +133,7 @@ Dieses Demo zeigt alle Funktionen des generierten Berichts:
 
 ## Akademische Grundlage
 
-**Maturity Model:**
 - Ainsbury, R. & Grayson, D. (2014). *Business Critical: Understanding a Company's Current and Desired Stages of Corporate Responsibility Maturity*. Doughty Centre for Corporate Responsibility, Cranfield University.
-
-**Communication Bias Adjustierung:**
-- Berg, F., Kolbel, J. F., & Rigobon, R. (2022). Aggregate confusion: The divergence of ESG ratings. *Review of Finance*.
-- PwC (2023). Global Investor Survey.
-- European Commission (2020). Consumer market study on environmental claims.
-- MIT Sloan (2024). Third-party auditors in carbon reporting.
-- Nature Climate Change (2025). Widespread revisions of self-reported emissions.
 
 ## License
 
