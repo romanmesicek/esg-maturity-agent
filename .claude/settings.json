@@ -7,7 +7,7 @@
       "Edit",
       "Glob",
       "Grep",
-      "WebFetch(domain:*)",
+      "WebFetch",
       "WebSearch",
       "Task",
       "Skill(*)"

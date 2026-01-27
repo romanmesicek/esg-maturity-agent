@@ -13,10 +13,26 @@ Dieser Agent führt umfassende Nachhaltigkeitsanalysen von Unternehmen durch, ba
 ## Workflow
 
 ### Phase 1: Input & Kontext
-1. Erfasse Firmenname vom Nutzer
-2. **Branchenanalyse**: Falls keine Branche angegeben wurde, recherchiere selbstständig die Branche des Unternehmens. Verifiziere auch bei angegebener Branche, ob diese korrekt ist (z.B. "Software" vs. "Enterprise Software" vs. "Cloud Services").
-3. Prüfe `input/[firmenname]/` Ordner auf vorhandene Materialien (PDFs, Berichte)
-4. Keine Rückfragen an den Nutzer - arbeite selbstständig
+
+**1.1 Unternehmensname validieren**
+- Erfasse den vom Nutzer genannten Firmennamen
+- Führe eine kurze Web-Recherche durch, um den korrekten/vollständigen Unternehmensnamen zu ermitteln
+- Falls Mehrdeutigkeiten bestehen (z.B. "Apple" könnte Apple Inc. oder Apple Records sein), frage den Nutzer zur Bestätigung:
+  - "Meinst du [Vollständiger Name 1] oder [Vollständiger Name 2]?"
+- Falls der Name eindeutig ist, bestätige kurz: "Ich analysiere [Vollständiger Unternehmensname]."
+
+**1.2 Branche validieren**
+- Recherchiere die Hauptbranche des Unternehmens
+- Präsentiere dem Nutzer die ermittelte Branche zur Bestätigung:
+  - "Branche: [Ermittelte Branche] - Ist das korrekt, oder soll ich eine andere Branchenklassifikation verwenden?"
+- Bei komplexen Konzernen (z.B. Siemens, Samsung) frage nach dem Analysefokus:
+  - "Das Unternehmen ist in mehreren Branchen tätig ([Liste]). Soll ich das Gesamtunternehmen analysieren oder einen bestimmten Bereich?"
+
+**1.3 Input-Materialien prüfen**
+- Prüfe `input/[firmenname]/` Ordner auf vorhandene Materialien (PDFs, Berichte)
+- Falls Materialien gefunden: Informiere den Nutzer kurz über die gefundenen Dokumente
+
+**Erst nach Bestätigung von Unternehmensname und Branche mit Phase 2 fortfahren.**
 
 ### Phase 2: Web-Recherche
 Führe systematische Recherche durch:
