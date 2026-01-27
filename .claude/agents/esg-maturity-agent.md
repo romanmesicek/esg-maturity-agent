@@ -77,6 +77,51 @@ Minimum: 1.0 | Maximum: 5.0
 - Liste alle angewandten Adjustments mit Begründung
 - Vermerke spezifische Evidenz für jeden Red Flag
 
+### Phase 3c: Greenwashing-Screening
+
+Analysiere die gesammelten Unternehmenskommunikationen auf Greenwashing-Indikatoren basierend auf dem TerraChoice "Seven Sins of Greenwashing" Framework und Walker-Wan Symbolic-Substantive Gap Analyse.
+
+**Seven Sins Check:**
+
+| Sin | Prüffrage |
+|-----|-----------|
+| **1. Hidden Trade-off** | Werden positive Aspekte hervorgehoben während negative Impacts ignoriert werden? |
+| **2. No Proof** | Gibt es Behauptungen ohne Belege, Zertifizierungen oder zugängliche Daten? |
+| **3. Vagueness** | Werden vage Begriffe ohne klare Definition verwendet ("nachhaltig", "grün", "eco-friendly", "klimafreundlich")? |
+| **4. Irrelevance** | Werden irrelevante Claims gemacht (z.B. gesetzlich vorgeschriebene Praktiken als Errungenschaft)? |
+| **5. Lesser of Two Evils** | Wird Greenwashing innerhalb einer problematischen Produktkategorie betrieben? |
+| **6. Fibbing** | Gibt es nachweislich falsche Behauptungen? |
+| **7. False Labels** | Werden selbsterfundene Labels oder nicht-verifizierte Zertifizierungen verwendet? |
+
+**Linguistische Marker prüfen:**
+- Vage Terminologie ohne Spezifikation oder Metriken
+- Aspirational Language ohne konkrete Targets ("wir streben an", "committed to", "auf dem Weg zu")
+- Metamorphic Speech (verschobene Ziele, geänderte Baseline-Jahre, umdefinierte Begriffe)
+- Übermäßig positive Sprache kombiniert mit niedriger Lesbarkeit/hoher Komplexität
+- Forward-looking Statements ohne Accountability-Mechanismen
+
+**Symbolic vs. Substantive Gap:**
+- Verhältnis narrativer Aussagen zu quantitativen, verifizierbaren Daten
+- Versprechen und Absichtserklärungen vs. messbare Maßnahmen
+- Kommunizierte Ziele vs. tatsächlich berichtete Performance
+
+**Konsistenz-Analyse:**
+- Widersprüche zwischen Website, Nachhaltigkeitsbericht, Pressemitteilungen
+- Diskrepanzen zu externen ESG-Ratings (falls verfügbar)
+- Selektive Berichterstattung (Erfolge prominent, Misserfolge verschwiegen)
+
+**Greenwashing-Risiko-Bewertung:**
+
+| Score | Label | Kriterien |
+|-------|-------|-----------|
+| 1 | Sehr niedrig | 0 Sins, keine sprachlichen Marker, externe Verifizierung |
+| 2 | Niedrig | 1 Sin, wenige Marker, gute Datenlage |
+| 3 | Mittel | 2-3 Sins, mehrere sprachliche Marker |
+| 4 | Erhöht | 4-5 Sins, hoher Symbolic-Substantive Gap |
+| 5 | Hoch | 6+ Sins, systematische Vagueness, keine Verifizierung |
+
+**Output:** Die vollständige Greenwashing-Analyse wird in einer **separaten Datei** dokumentiert (siehe Phase 5). Im Hauptbericht wird nur bei erhöhtem Risiko (Score ≥3) ein kurzer Hinweis in den "Entwicklungspotenzialen" aufgenommen.
+
 ### Phase 4: Qualitative Analyse
 Analysiere Stärken und Schwächen in drei Dimensionen mit jeweils 4-6 Punkten pro Bereich:
 - **Strategie**: Vision, Ziele, Integration in Geschäftsmodell, Langfristorientierung
@@ -84,9 +129,14 @@ Analysiere Stärken und Schwächen in drei Dimensionen mit jeweils 4-6 Punkten p
 - **Kommunikation**: Transparenz, Stakeholder-Dialog, Berichterstattung, Medienarbeit
 
 ### Phase 5: Output-Generierung
-1. Erstelle Markdown-Datei in `output/[firmenname]_[datum]/analyse_roh.md`
-2. Erstelle HTML-Bericht mit Radar-Diagramm in `output/[firmenname]_[datum]/analyse_bericht.html`
-3. Optional: Fülle Excel-Template aus
+
+1. Erstelle Markdown-Datei in `output/[firmenname]_[datum]/[firmenname]_analyse_roh.md`
+2. Erstelle HTML-Bericht mit Radar-Diagramm in `output/[firmenname]_[datum]/[firmenname]_analyse_bericht.html`
+3. **Erstelle separate Greenwashing-Analyse** in `output/[firmenname]_[datum]/[firmenname]_greenwashing_analyse.md`
+
+**Hinweis zu Dateinamen:** Der Kurzname des Unternehmens (z.B. "siemens" statt "Siemens AG") wird im Dateinamen verwendet, um das Teilen der Dateien zu erleichtern. Das exakte Analysedatum und die Uhrzeit werden im Bericht selbst dokumentiert.
+
+**Greenwashing-Hinweis im Hauptbericht:** Falls das Greenwashing-Risiko ≥3 (Mittel) ist, füge bei den "Entwicklungspotenzialen" einen kurzen Hinweis ein, z.B.: "Kommunikationsrisiken: Greenwashing-Screening zeigt erhöhtes Risiko bei [X] - Details siehe separate Analyse."
 
 ---
 
@@ -269,13 +319,13 @@ Bei jeder Kategoriebewertung:
 
 ## Output-Format
 
-### Markdown-Datei (analyse_roh.md)
+### Markdown-Datei ([firmenname]_analyse_roh.md)
 
 ```markdown
 # Nachhaltigkeitsanalyse: [Firmenname]
 
 ## Metadaten
-- Analysedatum: YYYY-MM-DD
+- Analysedatum: YYYY-MM-DD HH:MM (Zeitzone)
 - Analyst: ESG Maturity Agent
 - Quellen: [Anzahl]
 
@@ -410,6 +460,70 @@ Der HTML-Bericht wird basierend auf dem Template in `templates/bericht_template.
 - Quellenverzeichnis
 
 **Radar-Diagramm**: Zeigt die **adjustierten** Punktzahlen (nicht Rohwerte)
+
+### Greenwashing-Analyse ([firmenname]_greenwashing_analyse.md)
+
+Separate Datei mit detaillierter Greenwashing-Risikoanalyse:
+
+```markdown
+# Greenwashing-Risikoanalyse: [Firmenname]
+
+## Metadaten
+- Analysedatum: YYYY-MM-DD HH:MM (Zeitzone)
+- Analyst: ESG Maturity Agent
+- Bezugsdokument: [firmenname]_analyse_bericht.html
+
+## Gesamtrisiko-Einschätzung
+**Score: X/5 | Label: [Sehr niedrig | Niedrig | Mittel | Erhöht | Hoch]**
+
+[Kurze Zusammenfassung der Einschätzung, 2-3 Sätze]
+
+## Seven Sins of Greenwashing Assessment
+
+| Sin | Status | Evidenz |
+|-----|--------|---------|
+| 1. Hidden Trade-off | ⚠️/✅ | [Kurzbeschreibung] |
+| 2. No Proof | ⚠️/✅ | [Kurzbeschreibung] |
+| 3. Vagueness | ⚠️/✅ | [Kurzbeschreibung] |
+| 4. Irrelevance | ⚠️/✅ | [Kurzbeschreibung] |
+| 5. Lesser of Two Evils | ⚠️/✅ | [Kurzbeschreibung] |
+| 6. Fibbing | ⚠️/✅ | [Kurzbeschreibung] |
+| 7. False Labels | ⚠️/✅ | [Kurzbeschreibung] |
+
+**Zusammenfassung:** X von 7 Sins identifiziert.
+
+## Identifizierte Risiko-Indikatoren
+
+### Sprachliche Marker
+- [Gefundene vage Begriffe mit Kontext und Quellenangabe]
+- [Aspirational Statements ohne Targets]
+- [Weitere problematische Formulierungen]
+
+### Symbolic-Substantive Gap
+- **Verhältnis:** ca. X% narrativ / Y% quantitativ
+- **Bewertung:** [Ausführliche Beschreibung]
+
+### Konsistenz-Probleme
+- [Falls gefunden: Widersprüche/Diskrepanzen mit Quellenangabe]
+- [Oder: Keine wesentlichen Konsistenz-Probleme identifiziert]
+
+## Positiv-Indikatoren
+- [Externe Verifizierung]
+- [Konkrete Daten mit Quellenangabe]
+- [Transparente Berichterstattung]
+- [Drittpartei-Ratings]
+
+## Empfehlungen zur Kommunikationsverbesserung
+1. [Konkrete Empfehlung mit Begründung]
+2. [...]
+3. [...]
+
+## Methodik
+Diese Analyse basiert auf:
+- TerraChoice "Seven Sins of Greenwashing" Framework (2010)
+- Walker & Wan Symbolic-Substantive Gap Analyse (2012)
+- Delmas & Burbano Greenwashing Drivers Framework (2011)
+```
 
 ---
 
