@@ -128,7 +128,6 @@ Dieses Demo zeigt alle Funktionen des generierten Berichts:
 - Executive Summary und Unternehmensprofil
 - Detailbewertung mit Konfidenz-Indikatoren
 - Top 3 Stärken und Entwicklungspotenziale
-- Qualitative Analyse (Strategie, Prozesse, Kommunikation)
 - Branchenvergleich mit Wettbewerbern
 
 ## Akademische Grundlage
