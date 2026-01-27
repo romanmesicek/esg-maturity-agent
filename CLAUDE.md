@@ -137,8 +137,11 @@ Fokus: [optional: spezifische Schwerpunkte]
 ### Output
 
 Der Agent generiert in `output/[firmenname]_[datum]/`:
-- `analyse_roh.md` - Rohdaten und Volltext
-- `analyse_bericht.html` - Formatierter Bericht mit interaktivem Radar-Diagramm
+
+- `[firmenname]_analyse_roh.md` - Rohdaten und Volltext
+- `[firmenname]_analyse_bericht.html` - Formatierter Bericht mit interaktivem Radar-Diagramm
+
+Die Dateien enthalten den Firmennamen für einfacheres Teilen. Das exakte Analysedatum und die Uhrzeit werden im Bericht dokumentiert.
 
 ### Konfidenz-System
 
@@ -156,6 +159,35 @@ Der Agent wendet eine wissenschaftlich fundierte Bias-Korrektur an, um systemati
 - Red Flag-Adjustments: je -0.25 Punkte
 - Transparente Dokumentation von Roh- und adjustierten Punktzahlen
 
+### Text Quality Enhancement (Humanizer)
+
+Generierte ESG-Berichte können mit dem [Humanizer Skill](https://github.com/blader/humanizer) nachbearbeitet werden, um typische KI-Schreibmuster zu entfernen und natürlicher klingende Texte zu erzeugen.
+
+**Installation:**
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/blader/humanizer.git ~/.claude/skills/humanizer
+```
+
+**Verwendung:**
+
+Nach Erstellung eines ESG-Berichts den Skill aufrufen:
+
+```text
+/humanizer [Text oder Dateiinhalt]
+```
+
+Der Humanizer erkennt und korrigiert 24 typische KI-Schreibmuster, darunter:
+
+- Übertriebene Bedeutungszuschreibungen
+- KI-typisches Vokabular ("Additionally", "testament", "landscape")
+- Übermäßige Verwendung von Gedankenstrichen
+- Vage Quellenangaben ("Experten sagen...")
+- Floskeln und Füllwörter
+
+Weitere Details: [github.com/blader/humanizer](https://github.com/blader/humanizer)
+
 ## Input-Ordner
 
 Für jede Analyse können Kundenmaterialien in `input/[firmenname]/` bereitgestellt werden:
@@ -169,6 +201,22 @@ Siehe `input/README.md` für detaillierte Anleitung.
 ## Output Directory
 
 `output/` - Directory for generated analysis reports and assessments
+
+## GitHub Pages & Live Demo
+
+Der Demo-Bericht ist automatisch unter GitHub Pages verfügbar:
+
+**Live-Demo:** <https://romanmesicek.github.io/esg-maturity-agent/templates/bericht_demo.html>
+
+### Automatisches Deployment
+
+Das Repository enthält einen GitHub Actions Workflow (`.github/workflows/deploy-pages.yml`), der bei jedem Push auf den `main` Branch automatisch die GitHub Pages aktualisiert. Änderungen am Demo-Bericht oder Templates werden somit automatisch live geschaltet.
+
+**Setup (einmalig in GitHub):**
+
+1. Repository Settings → Pages
+2. Source: "GitHub Actions" auswählen
+3. Der Workflow deployed automatisch bei jedem Push
 
 ## License
 
