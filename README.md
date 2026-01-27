@@ -139,7 +139,3 @@ Dieses Demo zeigt alle Funktionen des generierten Berichts:
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 You are free to use, modify, and distribute this software for any purpose, including commercial applications.
-
----
-
-**Entwicklung:** Roman Mesicek | [www.mesicek.com](https://www.mesicek.com)
