@@ -93,7 +93,9 @@ Minimum: 1.0 | Maximum: 5.0
 - Liste alle angewandten Adjustments mit Begründung
 - Vermerke spezifische Evidenz für jeden Red Flag
 
-### Phase 3c: Greenwashing-Screening
+### Phase 3c: Greenwashing-Screening (PFLICHT)
+
+**WICHTIG: Diese Phase ist obligatorisch und muss für jede Analyse durchgeführt werden.**
 
 Analysiere die gesammelten Unternehmenskommunikationen auf Greenwashing-Indikatoren basierend auf dem TerraChoice "Seven Sins of Greenwashing" Framework und Walker-Wan Symbolic-Substantive Gap Analyse.
 
@@ -146,9 +148,19 @@ Analysiere Stärken und Schwächen in drei Dimensionen mit jeweils 4-6 Punkten p
 
 ### Phase 5: Output-Generierung
 
+**Alle drei Dateien müssen erstellt werden:**
+
 1. Erstelle Markdown-Datei in `output/[firmenname]_[datum]/[firmenname]_analyse_roh.md`
 2. Erstelle HTML-Bericht mit Radar-Diagramm in `output/[firmenname]_[datum]/[firmenname]_analyse_bericht.html`
 3. **Erstelle separate Greenwashing-Analyse** in `output/[firmenname]_[datum]/[firmenname]_greenwashing_analyse.md`
+
+**CHECKLISTE VOR ABSCHLUSS:**
+
+- [ ] `[firmenname]_analyse_roh.md` erstellt?
+- [ ] `[firmenname]_analyse_bericht.html` erstellt?
+- [ ] `[firmenname]_greenwashing_analyse.md` erstellt?
+- [ ] Greenwashing-Score in der Greenwashing-Datei dokumentiert?
+- [ ] Bei Greenwashing-Score ≥3: Hinweis in Hauptbericht eingefügt?
 
 **Hinweis zu Dateinamen:** Der Kurzname des Unternehmens (z.B. "siemens" statt "Siemens AG") wird im Dateinamen verwendet, um das Teilen der Dateien zu erleichtern. Das exakte Analysedatum und die Uhrzeit werden im Bericht selbst dokumentiert.
 
@@ -465,15 +477,21 @@ Der HTML-Bericht wird basierend auf dem Template in `templates/bericht_template.
 - Farbcodierung nach Stage (1=rot bis 5=grün)
 - Druckoptimiert
 
-**WICHTIG:** Der HTML-Bericht muss denselben Informationsumfang wie die MD-Datei haben:
+**WICHTIG:** Der HTML-Bericht enthält:
+- Versionsnummer (v3) in der Header-Zeile
 - Unternehmensprofil mit allen Kennzahlen
 - Nachhaltigkeitsstrategie mit Zitaten und Kernelementen
+- **Nachhaltigkeitsprofil nach Ainsbury-Grayson** als starke Zwischenüberschrift mit Erklärung vor dem Radar-Diagramm
 - Top 3 Stärken und Entwicklungspotenziale (prominent dargestellt)
 - Vollständige Detailbewertung aller 11 Kategorien (mit Roh- UND adjustierten Punktzahlen)
 - **Bias-Analyse Zusammenfassung** (Verifizierungsniveau, Red Flags, Kommunikationsqualität)
-- Qualitative Analyse (Strategie, Prozesse, Kommunikation)
 - Ausführlicher Branchenvergleich mit Wettbewerbern
 - Quellenverzeichnis
+- **Methodik-Erklärung** am Ende (11 Kategorien und 5 Stufen)
+- Footer mit Link zu 36sustainability.org (NICHT mesicek.com, KEINE "Generiert mit"-Zeile)
+
+**NICHT im HTML-Bericht** (nur in der Markdown-Datei):
+- Qualitative Analyse (Strategie, Prozesse, Kommunikation)
 
 **Radar-Diagramm**: Zeigt die **adjustierten** Punktzahlen (nicht Rohwerte)
 
