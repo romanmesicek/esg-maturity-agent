@@ -8,7 +8,14 @@ Der Agent führt automatisierte Web-Recherche durch, bewertet Unternehmen anhand
 
 ## Funktionsweise
 
-Der Agent analysiert Unternehmen anhand von 11 Kategorien und bewertet sie auf einer Skala von 1-5:
+**Was der Agent macht:**
+
+1. Recherchiert automatisch Nachhaltigkeitsinformationen aus Web-Quellen, Berichten und Pressemeldungen
+2. Überprüft die Rechercheergebnisse auf einen positiven Kommunikations-Bias und anhand von Greenwashing-Kriterien und gewichtet diese entsprechend
+3. Bewertet Unternehmen systematisch in 11 Embedding-Kategorien auf einer ordinalen Skala von 1 (Denier) bis 5 (Champion)
+4. Generiert interaktive HTML-Berichte mit Radar-Diagrammen
+
+### Die 5 Reifegradstufen
 
 | Stage | Name | Beschreibung |
 |-------|------|--------------|
@@ -18,7 +25,7 @@ Der Agent analysiert Unternehmen anhand von 11 Kategorien und bewertet sie auf e
 | 4 | Opportunity Maximiser | Systematische Nutzung von Nachhaltigkeitschancen |
 | 5 | Champion | Vorreiter mit integrierter Nachhaltigkeitsstrategie |
 
-## Die 11 Bewertungskategorien
+### Die 11 Embedding-Kategorien
 
 1. Purpose, Vision, Values & Strategy
 2. Tone from the Top: Leadership
@@ -31,6 +38,14 @@ Der Agent analysiert Unternehmen anhand von 11 Kategorien und bewertet sie auf e
 9. Stakeholder Engagement, Communications
 10. Collaborations, Partnerships and Sustainability Networks
 11. Specialist CR Function
+
+### Konfidenz-System
+
+Jede Bewertung enthält eine Konfidenz-Markierung, die angibt, wie verlässlich die Einschätzung ist:
+
+- **Hoch** = mehrere klare Evidenzquellen
+- **Mittel** = einige Evidenz vorhanden
+- **Niedrig** = Bewertung basiert auf Inferenz
 
 ## Communication Bias Adjustierung
 
