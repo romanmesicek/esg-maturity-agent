@@ -107,7 +107,7 @@ Die Berichte enthalten:
 
 Ein Beispiel-Bericht für ein anonymes Musterunternehmen ist verfügbar:
 
-**[Demo-Bericht ansehen (bericht_demo.html)](templates/bericht_demo.html)**
+**[Live-Demo ansehen](https://romanmesicek.github.io/esg-maturity-agent/templates/bericht_demo.html)**
 
 Dieses Demo zeigt alle Funktionen des generierten Berichts:
 - Interaktives Radar-Diagramm mit allen 11 Kategorien
