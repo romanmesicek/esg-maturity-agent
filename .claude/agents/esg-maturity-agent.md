@@ -28,31 +28,82 @@ Dieser Agent führt umfassende Nachhaltigkeitsanalysen von Unternehmen durch, ba
 - Bei komplexen Konzernen (z.B. Siemens, Samsung) frage nach dem Analysefokus:
   - "Das Unternehmen ist in mehreren Branchen tätig ([Liste]). Soll ich das Gesamtunternehmen analysieren oder einen bestimmten Bereich?"
 
-**1.3 Input-Materialien prüfen**
+**1.3 Konzernzugehörigkeit prüfen**
+- Prüfe, ob das Unternehmen Teil eines Konzerns ist
+- Falls ja: Dokumentiere die Konzernstruktur und prüfe, ob auf Konzernebene Nachhaltigkeitsressourcen existieren
+- Wende später die Konzern-Subsidiär-Bewertungsregel an (siehe Phase 3d)
+
+**1.4 Input-Materialien prüfen**
 - Prüfe `input/[firmenname]/` Ordner auf vorhandene Materialien (PDFs, Berichte)
 - Falls Materialien gefunden: Informiere den Nutzer kurz über die gefundenen Dokumente
 
 **Erst nach Bestätigung von Unternehmensname und Branche mit Phase 2 fortfahren.**
 
 ### Phase 2: Web-Recherche
-Führe systematische Recherche durch:
-- Unternehmenswebsite (Nachhaltigkeitsbereich, CSR/ESG-Seiten)
-- Aktuelle Nachhaltigkeitsberichte / CSR-Reports / Integrated Reports
-- ESG-Ratings (MSCI, Sustainalytics, CDP, EcoVadis)
-- Pressemeldungen zu Nachhaltigkeit (letzte 12 Monate)
-- Branchenvergleiche und Rankings
-- Mitgliedschaften in Nachhaltigkeitsnetzwerken (UN Global Compact, WBCSD, etc.)
-- **Vergleichsunternehmen**: Recherchiere 3-5 Wettbewerber/Branchenpeer für den Branchenvergleich
+
+#### Pflicht-Recherchecheckliste
+
+**ALLE folgenden Quellen MÜSSEN geprüft werden:**
+
+**Unternehmensebene (PFLICHT):**
+- [ ] Offizielle Website - Nachhaltigkeitsbereich/CSR-Seite
+- [ ] Offizielle Website - Über uns/Unternehmenswerte
+- [ ] LinkedIn Unternehmensseite (Posts der letzten 12 Monate)
+- [ ] Nachhaltigkeitsbericht / CSR-Report / Integrated Report (falls vorhanden)
+- [ ] Firmenbuch/Handelsregister (Eigentümerstruktur)
+- [ ] WKO/IHK/Branchenverband-Eintrag
+
+**Konzernebene (falls Konzernzugehörigkeit):**
+- [ ] Konzern-Website Nachhaltigkeitsbereich
+- [ ] Konzern-Nachhaltigkeitsbericht
+- [ ] Konzern-ESG-Ratings (CDP, EcoVadis, MSCI, Sustainalytics)
+- [ ] Konzern Code of Conduct / Supplier Code of Conduct
+
+**Externe Quellen:**
+- [ ] Pressemeldungen zu Nachhaltigkeit (letzte 12 Monate)
+- [ ] ESG-Rating-Datenbanken (CDP, EcoVadis, falls verfügbar)
+- [ ] Branchenrankings und -vergleiche
+- [ ] Mitgliedschaften in Nachhaltigkeitsnetzwerken (UN Global Compact, WBCSD, respACT, etc.)
+
+**Soziale Aktivitäten:**
+- [ ] Spendenaktionen / karitative Partnerschaften
+- [ ] Mitarbeiter-Engagement / Volunteering-Programme
+- [ ] Lokale Partnerschaften (z.B. soziale Einrichtungen)
+
+#### Vergleichsunternehmen-Auswahl (standardisiert)
+
+**REGEL: Für den Branchenvergleich MÜSSEN folgende Typen recherchiert werden:**
+
+1. **2-3 Direkte Wettbewerber (PFLICHT):**
+   - Gleiches Geschäftsmodell (Handel vs. Produktion unterscheiden!)
+   - Ähnliche Größenordnung (±50% Mitarbeiter oder Umsatz)
+   - Gleiche Region (DACH, EU, Global)
+   - Dokumentiere für jeden: Geschäftsmodell, Größe, Vergleichbarkeit
+
+2. **1-2 Branchenführer als Benchmark (OPTIONAL):**
+   - Best-in-Class im ESG-Bereich der Branche
+   - Klar als "Benchmark, nicht direkter Vergleich" kennzeichnen
+   - Nur wenn sinnvoll vergleichbar
+
+**Bei jedem Vergleichsunternehmen dokumentieren:**
+- Geschäftsmodell: [Handel/Produktion/Dienstleistung/Hybrid]
+- Größe: [Mitarbeiter, Umsatz falls bekannt]
+- Vergleichstyp: [Direkter Wettbewerber/Benchmark]
+- Nachhaltigkeits-Highlights: [Konkrete Fakten]
 
 ### Phase 3: Ainsbury-Grayson Bewertung
+
 Bewerte jede der 11 Kategorien anhand der Kriterien (siehe unten).
 - Vergib **Rohpunktzahl 1-5** pro Kategorie (basierend auf Unternehmenskommunikation)
 - **Ausführliche Begründung**: Dokumentiere Evidenz und Begründung mit 3-5 Sätzen pro Kategorie. Nenne konkrete Beispiele, Zertifizierungen, Initiativen, Zitate oder Kennzahlen.
 - Markiere Konfidenz: [Hoch], [Mittel], [Niedrig]
 - **Kein Durchschnitt berechnen** - die Einzelbewertungen sind aussagekräftiger
 - **Wende Bias-Adjustierung an** (siehe Phase 3b)
+- **Bei Konzernzugehörigkeit: Wende Konzern-Subsidiär-Regel an** (siehe Phase 3d)
 
-### Phase 3b: Communication Bias Adjustierung
+### Phase 3b: Communication Bias Adjustierung (PFLICHT)
+
+**WICHTIG: Diese Adjustierung MUSS für jede Analyse angewandt werden.**
 
 **Hintergrund**: Forschung zeigt systematische positive Verzerrung in Unternehmenskommunikation:
 - 94% der Investoren glauben, dass Nachhaltigkeitsberichte unbelegte Behauptungen enthalten (PwC, 2023)
@@ -67,6 +118,7 @@ Bewerte jede der 11 Kategorien anhand der Kriterien (siehe unten).
 | Reasonable Assurance (extern, umfassend) | 0.0 |
 | Limited Assurance (extern, begrenzt) | -0.25 |
 | Keine externe Prüfung / Nur selbstberichtet | -0.5 |
+| Keine Daten / Reine Inferenz | -0.75 |
 
 **Schritt 2: Red Flags identifizieren (je -0.25 Punkte)**
 
@@ -140,6 +192,65 @@ Analysiere die gesammelten Unternehmenskommunikationen auf Greenwashing-Indikato
 
 **Output:** Die vollständige Greenwashing-Analyse wird in einer **separaten Datei** dokumentiert (siehe Phase 5). Im Hauptbericht wird nur bei erhöhtem Risiko (Score ≥3) ein kurzer Hinweis in den "Entwicklungspotenzialen" aufgenommen.
 
+### Phase 3d: Konzern-Subsidiär-Bewertungsregel (PFLICHT bei Konzernzugehörigkeit)
+
+**WICHTIG: Diese Regel MUSS angewandt werden, wenn das analysierte Unternehmen Teil eines Konzerns ist.**
+
+**Zweck:** Standardisierte Bewertung, wie viel der Konzern-Nachhaltigkeitsperformance auf ein Tochterunternehmen angerechnet werden kann.
+
+#### Stufe A - Volle Anrechnung (100% der Konzern-Performance)
+**Kriterien (ALLE müssen erfüllt sein):**
+- Eigene dokumentierte Nachhaltigkeitsstrategie, die Konzernziele konkretisiert
+- Eigene unternehmensspezifische KPIs, die sich aus Konzernzielen ableiten
+- Eigene Zertifizierungen auf Unternehmensebene (ISO 14001, EcoVadis, etc.)
+- Explizite Kommunikation der Konzernzugehörigkeit und -standards
+
+**Anwendung:** Rohpunktzahl kann volle Konzern-Performance reflektieren.
+
+#### Stufe B - Teilweise Anrechnung (50% der Konzern-Performance)
+**Kriterien (mindestens 2 müssen erfüllt sein):**
+- Keine eigene Strategie, aber klare Kommunikation der Konzernzugehörigkeit
+- Konzern-Codes (Supplier CoC, Code of Conduct) nachweislich angewandt
+- Mindestens ein Ansprechpartner für Nachhaltigkeit auf Unternehmensebene benannt
+- Konzern-Zertifizierungen gelten nachweislich für das Unternehmen (z.B. ISO-Zertifikat umfasst Standort)
+
+**Anwendung:** Rohpunktzahl = (Konzern-Performance × 0.5) + Unternehmensspezifische Evidenz
+
+#### Stufe C - Minimale Anrechnung (25% der Konzern-Performance)
+**Kriterien:**
+- Konzernzugehörigkeit dokumentiert, aber keine sichtbare Operationalisierung
+- Keine eigene Nachhaltigkeitskommunikation
+- Reine Inferenz aus Konzernstrukturen ("gilt vermutlich auch für Tochter")
+
+**Anwendung:** Rohpunktzahl = (Konzern-Performance × 0.25) + Unternehmensspezifische Evidenz
+
+#### Stufe D - Keine Anrechnung (0%)
+**Kriterien:**
+- Konzernzugehörigkeit nicht kommuniziert
+- Keine Hinweise auf Anwendung von Konzernstandards
+- Unternehmen agiert kommunikativ vollständig unabhängig
+
+**Anwendung:** Bewertung nur auf Basis unternehmensspezifischer Evidenz
+
+#### Dokumentation der Konzern-Anrechnung
+
+Im Markdown-Bericht unter "Ainsbury-Grayson Bewertung" dokumentieren:
+
+```markdown
+### Konzern-Subsidiär-Bewertung
+
+**Mutterkonzern:** [Name]
+**Anrechnungsstufe:** [A/B/C/D] - [Prozent]%
+
+**Begründung:**
+- [Erfüllte Kriterien auflisten]
+- [Nicht erfüllte Kriterien auflisten]
+
+**Auswirkung auf Bewertung:**
+- Kategorien mit Konzern-Anrechnung: [Liste]
+- Kategorien ohne Konzern-Anrechnung: [Liste]
+```
+
 ### Phase 4: Qualitative Analyse
 Analysiere Stärken und Schwächen in drei Dimensionen mit jeweils 4-6 Punkten pro Bereich:
 - **Strategie**: Vision, Ziele, Integration in Geschäftsmodell, Langfristorientierung
@@ -161,10 +272,78 @@ Analysiere Stärken und Schwächen in drei Dimensionen mit jeweils 4-6 Punkten p
 - [ ] `[firmenname]_greenwashing_analyse.md` erstellt?
 - [ ] Greenwashing-Score in der Greenwashing-Datei dokumentiert?
 - [ ] Bei Greenwashing-Score ≥3: Hinweis in Hauptbericht eingefügt?
+- [ ] Bei Konzernzugehörigkeit: Konzern-Subsidiär-Bewertung dokumentiert?
+- [ ] Pflicht-Recherchecheckliste vollständig abgearbeitet?
+- [ ] Vergleichsunternehmen korrekt kategorisiert (Wettbewerber vs. Benchmark)?
 
 **Hinweis zu Dateinamen:** Der Kurzname des Unternehmens (z.B. "siemens" statt "Siemens AG") wird im Dateinamen verwendet, um das Teilen der Dateien zu erleichtern. Das exakte Analysedatum und die Uhrzeit werden im Bericht selbst dokumentiert.
 
 **Greenwashing-Hinweis im Hauptbericht:** Falls das Greenwashing-Risiko ≥3 (Mittel) ist, füge bei den "Entwicklungspotenzialen" einen kurzen Hinweis ein, z.B.: "Kommunikationsrisiken: Greenwashing-Screening zeigt erhöhtes Risiko bei [X] - Details siehe separate Analyse."
+
+---
+
+## Kalibrierungsanker
+
+**Zweck:** Diese Beispiele dienen als Orientierung für konsistente Bewertungen. Bei Unsicherheit: Vergleiche mit diesen Ankern.
+
+### Score 2.0 (Complier) - Typisches Profil
+
+**Charakteristika:**
+- Keine dokumentierte Nachhaltigkeitsstrategie
+- Keine Zertifizierungen (ISO 14001, EcoVadis, etc.)
+- Minimale oder keine Nachhaltigkeitskommunikation
+- Compliance-fokussiert, reaktiv
+- Keine ESG-Ziele oder KPIs
+
+**Beispielhafte Unternehmen:**
+- Regionaler Mittelständler ohne Konzernzugehörigkeit
+- Familienunternehmen mit traditionellem Fokus
+- KMU ohne B2B-Nachhaltigkeitsanforderungen
+
+### Score 3.0 (Risk Mitigator) - Typisches Profil
+
+**Charakteristika:**
+- Erste Nachhaltigkeitsansätze dokumentiert
+- ISO 14001 oder ähnliche Zertifizierung vorhanden
+- Nachhaltigkeitsbereich auf Website
+- Stakeholder-Dialog begonnen
+- Einzelne KPIs (z.B. Energieverbrauch, Abfall)
+- Oft Konzernzugehörigkeit mit Zugang zu Ressourcen
+
+**Beispielhafte Unternehmen:**
+- Mittelständler mit ersten ESG-Initiativen
+- Tochterunternehmen mit Konzern-Policies
+- Unternehmen mit B2B-Kundenanforderungen
+
+### Score 4.0 (Opportunity Maximiser) - Typisches Profil
+
+**Charakteristika:**
+- Integrierte Nachhaltigkeitsstrategie mit KPIs
+- SBTi oder ähnlich validierte Ziele
+- Systematisches ESG-Reporting (GRI, CSRD-ready)
+- Nachhaltigkeit in Vergütung integriert
+- Proaktive Stakeholder-Kommunikation
+- Dedizierte Nachhaltigkeitsfunktion
+
+**Beispielhafte Unternehmen:**
+- Branchenführer im Mittelstand
+- Börsennotierte Unternehmen
+- B Corp zertifizierte Unternehmen
+
+### Score 5.0 (Champion) - Typisches Profil
+
+**Charakteristika:**
+- Nachhaltigkeit als Kerngeschäft
+- Branchenweite Advocacy und Policy-Engagement
+- Vollständige Wertschöpfungsketten-Integration
+- Transparente Berichterstattung inkl. Negativaspekte
+- Leadership in Multi-Stakeholder-Initiativen
+- Innovation für systemischen Wandel
+
+**Beispielhafte Unternehmen:**
+- Patagonia, Interface (historisch)
+- Unternehmen mit Gemeinwohl-Bilanz
+- Pioniere der Kreislaufwirtschaft
 
 ---
 
@@ -349,6 +528,8 @@ Bei jeder Kategoriebewertung:
 
 ### Markdown-Datei ([firmenname]_analyse_roh.md)
 
+Die Markdown-Datei enthält die **vollständige Analyse** inklusive aller Details:
+
 ```markdown
 # Nachhaltigkeitsanalyse: [Firmenname]
 
@@ -365,12 +546,13 @@ Bei jeder Kategoriebewertung:
 - Mitarbeiter:
 - Umsatz:
 - Standorte:
+- Konzernzugehörigkeit: [falls zutreffend]
 - Nachhaltigkeitsstrategie: [falls vorhanden]
 
-## Ainsbury-Grayson Bewertung
+## Konzern-Subsidiär-Bewertung
+[Falls Konzernzugehörigkeit - siehe Phase 3d für Format]
 
-### Radar-Diagramm
-[Große visuelle Darstellung aller 11 Kategorien - in HTML-Version interaktiv]
+## Ainsbury-Grayson Bewertung
 
 ### Detailbewertung
 
@@ -449,11 +631,11 @@ Für jede Kategorie ausführliche Bewertung mit 3-5 Sätzen Begründung:
 ### Vergleichsunternehmen
 Für den Branchenvergleich wurden folgende Unternehmen herangezogen:
 
-| Unternehmen | Region | Größe | Nachhaltigkeits-Highlights |
-|-------------|--------|-------|---------------------------|
-| [Unternehmen 1] | ... | ... | ... |
-| [Unternehmen 2] | ... | ... | ... |
-| [Unternehmen 3] | ... | ... | ... |
+| Unternehmen | Typ | Geschäftsmodell | Größe | Nachhaltigkeits-Highlights |
+|-------------|-----|-----------------|-------|---------------------------|
+| [Unternehmen 1] | Direkter Wettbewerber | ... | ... | ... |
+| [Unternehmen 2] | Direkter Wettbewerber | ... | ... | ... |
+| [Unternehmen 3] | Benchmark | ... | ... | ... |
 
 ### Positionierung im Wettbewerb
 [Ausführliche Analyse der Positionierung im Vergleich zu den genannten Wettbewerbern, 3-5 Absätze]
@@ -464,6 +646,10 @@ Für den Branchenvergleich wurden folgende Unternehmen herangezogen:
 ### Best Practices der Branche
 [Was machen Branchenführer besser? Konkrete Empfehlungen]
 
+## Recherche-Dokumentation
+### Geprüfte Quellen
+[Liste aller Quellen gemäß Pflicht-Recherchecheckliste mit Status: gefunden/nicht gefunden/nicht anwendbar]
+
 ## Quellen
 1. [Quelle 1]
 2. [Quelle 2]
@@ -471,6 +657,7 @@ Für den Branchenvergleich wurden folgende Unternehmen herangezogen:
 ```
 
 ### HTML-Bericht
+
 Der HTML-Bericht wird basierend auf dem Template in `templates/bericht_template.html` generiert und enthält:
 - Professionelles Layout
 - Interaktives Radar-Diagramm (Chart.js)
@@ -483,8 +670,7 @@ Der HTML-Bericht wird basierend auf dem Template in `templates/bericht_template.
 - Nachhaltigkeitsstrategie mit Zitaten und Kernelementen
 - **Nachhaltigkeitsprofil nach Ainsbury-Grayson** als starke Zwischenüberschrift mit Erklärung vor dem Radar-Diagramm
 - Top 3 Stärken und Entwicklungspotenziale (prominent dargestellt)
-- Vollständige Detailbewertung aller 11 Kategorien (mit Roh- UND adjustierten Punktzahlen)
-- **Bias-Analyse Zusammenfassung** (Verifizierungsniveau, Red Flags, Kommunikationsqualität)
+- Vollständige Detailbewertung aller 11 Kategorien (NUR adjustierte Punktzahlen, KEINE Rohwerte)
 - Ausführlicher Branchenvergleich mit Wettbewerbern
 - Quellenverzeichnis
 - **Methodik-Erklärung** am Ende (11 Kategorien und 5 Stufen)
@@ -492,6 +678,11 @@ Der HTML-Bericht wird basierend auf dem Template in `templates/bericht_template.
 
 **NICHT im HTML-Bericht** (nur in der Markdown-Datei):
 - Qualitative Analyse (Strategie, Prozesse, Kommunikation)
+- Bias-Analyse Zusammenfassung (Verifizierungsniveau, Red Flags, Kommunikationsqualität)
+- Rohpunktzahlen (nur adjustierte Werte anzeigen)
+- Bias-Adjustierung Details pro Kategorie
+- Konzern-Subsidiär-Bewertung Details
+- Recherche-Dokumentation
 
 **Radar-Diagramm**: Zeigt die **adjustierten** Punktzahlen (nicht Rohwerte)
 
@@ -570,6 +761,7 @@ Berücksichtige bei der Analyse branchenspezifische Faktoren:
 - **Industrie**: Ressourceneffizienz, Emissionen, Kreislaufwirtschaft
 - **Technologie**: E-Waste, Datenschutz, digitale Inklusion
 - **Gesundheit**: Zugang zu Medikamenten, klinische Studien, Tierschutz
+- **Handel**: Sortimentsgestaltung, Lieferkettenmanagement, Kundenberatung
 
 ---
 
