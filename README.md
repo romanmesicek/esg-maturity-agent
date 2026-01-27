@@ -13,7 +13,8 @@ Der Agent führt automatisierte Web-Recherche durch, bewertet Unternehmen anhand
 1. Recherchiert automatisch Nachhaltigkeitsinformationen aus Web-Quellen, Berichten und Pressemeldungen
 2. Überprüft die Rechercheergebnisse auf einen positiven Kommunikations-Bias und anhand von Greenwashing-Kriterien und gewichtet diese entsprechend
 3. Bewertet Unternehmen systematisch in 11 Embedding-Kategorien auf einer ordinalen Skala von 1 (Denier) bis 5 (Champion)
-4. Generiert interaktive HTML-Berichte mit Radar-Diagrammen
+4. Weist jeder Bewertung ein Konfidenz-Level zu, das angibt, wie verlässlich die Einschätzung ist
+5. Generiert interaktive HTML-Berichte mit Radar-Diagrammen
 
 ### Die 5 Reifegradstufen
 
