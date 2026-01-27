@@ -240,6 +240,22 @@
         .strengths li::before { color: #27ae60; }
         .weaknesses li::before { color: #e74c3c; }
 
+        /* Demo Info Box Liste */
+        .demo-info-list {
+            list-style: disc;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .demo-info-list li {
+            padding: 5px 0;
+            padding-left: 0;
+        }
+
+        .demo-info-list li::before {
+            content: none;
+        }
+
         /* Erweiterter Branchenvergleich */
         .benchmark-section {
             background: #f8f9fa;
@@ -321,7 +337,7 @@
 <body>
     <header>
         <h1>Nachhaltigkeitsanalyse</h1>
-        <div class="subtitle">Muster GmbH <span class="demo-badge">DEMO-BEISPIEL</span></div>
+        <div class="subtitle"><span class="demo-badge">DEMO-BEISPIEL</span> Muster GmbH</div>
         <div class="meta">
             <span>Analysedatum: 27. Dezember 2025</span>
             <span>Analyst: ESG Maturity Agent</span>
@@ -333,12 +349,12 @@
         <h3 style="color: #856404; margin: 0 0 15px 0; font-size: 1.3em;">Willkommen beim ESG Maturity Agent Demo</h3>
         <p style="margin-bottom: 15px;">Dies ist ein <strong>Beispielbericht</strong>, der zeigt, wie der ESG Maturity Agent Unternehmen analysiert und bewertet. Der Agent nutzt das wissenschaftlich fundierte <strong>Ainsbury-Grayson 5-Stages-of-Maturity-Modell</strong> (Cranfield University), um die Nachhaltigkeitsreife von Unternehmen systematisch zu bewerten.</p>
         <p style="margin-bottom: 15px;"><strong>Was der Agent macht:</strong></p>
-        <ul style="margin-bottom: 15px; padding-left: 20px;">
-            <li style="padding: 5px 0;">Recherchiert automatisch Nachhaltigkeitsinformationen aus Web-Quellen, Berichten und Pressemeldungen</li>
-            <li style="padding: 5px 0;">Überprüft die Rechercheergebnisse auf einen positiven Kommunikations-Bias und anhand von Greenwashing-Kriterien und gewichtet diese entsprechend</li>
-            <li style="padding: 5px 0;">Bewertet Unternehmen systematisch in 11 Embedding-Kategorien auf einer ordinalen Skala von 1 (Denier) bis 5 (Champion)</li>
-            <li style="padding: 5px 0;">Weist jeder Bewertung ein Konfidenz-Level zu, das angibt, wie verlässlich die Einschätzung ist</li>
-            <li style="padding: 5px 0;">Generiert interaktive HTML-Berichte mit Radar-Diagrammen</li>
+        <ul class="demo-info-list" style="margin-bottom: 15px;">
+            <li>Recherchiert automatisch Nachhaltigkeitsinformationen aus Web-Quellen, Berichten und Pressemeldungen</li>
+            <li>Überprüft die Rechercheergebnisse auf einen positiven Kommunikations-Bias und anhand von Greenwashing-Kriterien und gewichtet diese entsprechend</li>
+            <li>Bewertet Unternehmen systematisch in 11 Embedding-Kategorien auf einer ordinalen Skala von 1 (Denier) bis 5 (Champion)</li>
+            <li>Weist jeder Bewertung ein Konfidenz-Level zu, das angibt, wie verlässlich die Einschätzung ist</li>
+            <li>Generiert interaktive HTML-Berichte mit Radar-Diagrammen</li>
         </ul>
         <p style="margin-bottom: 0;"><strong>Hinweis:</strong> Die "Muster GmbH" ist ein fiktives Unternehmen. Dieser Bericht demonstriert das Format und die Analysemethodik des Agents. Mehr Informationen: <a href="https://github.com/romanmesicek/esg-maturity-agent" style="color: #856404; font-weight: bold;">github.com/romanmesicek/esg-maturity-agent</a></p>
     </section>
