@@ -4,18 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nachhaltigkeitsanalyse: Muster GmbH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
+            /* Certisix Sustainability Brand Colors */
+            --brand-jade: #004A4A;
+            --brand-olive: #959E40;
+            --brand-purple: #AA80E0;
+            --brand-coral: #FC6E45;
+            --brand-white: #FFFFFC;
+            /* Stage Colors for Maturity Levels */
             --stage-1: #e74c3c;
             --stage-2: #e67e22;
             --stage-3: #f1c40f;
             --stage-4: #27ae60;
             --stage-5: #2ecc71;
-            --primary: #2c3e50;
-            --secondary: #34495e;
-            --light: #ecf0f1;
-            --border: #bdc3c7;
+            /* UI Colors mapped to brand */
+            --primary: var(--brand-jade);
+            --secondary: #006666;
+            --light: #f5f7f5;
+            --border: #d0d8d0;
+            --accent: var(--brand-coral);
         }
 
         * {
@@ -25,10 +35,11 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Raleway', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 400;
             line-height: 1.6;
             color: var(--primary);
-            background: #fff;
+            background: var(--brand-white);
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
@@ -48,20 +59,24 @@
         }
 
         header {
-            border-bottom: 4px solid var(--primary);
-            padding-bottom: 20px;
+            background: var(--brand-jade);
+            color: var(--brand-white);
+            padding: 40px;
+            border-radius: 12px;
             margin-bottom: 40px;
         }
 
         h1 {
             font-size: 2.5em;
-            color: var(--primary);
+            font-weight: 600;
+            color: var(--brand-white);
             margin-bottom: 10px;
         }
 
         .subtitle {
             font-size: 1.2em;
-            color: var(--secondary);
+            color: var(--brand-white);
+            opacity: 0.95;
         }
 
         .meta {
@@ -69,36 +84,40 @@
             gap: 30px;
             margin-top: 15px;
             font-size: 0.9em;
-            color: #666;
+            color: var(--brand-white);
+            opacity: 0.85;
         }
 
         .demo-badge {
-            background: var(--stage-3);
-            color: var(--primary);
+            background: var(--brand-coral);
+            color: var(--brand-white);
             padding: 5px 15px;
             border-radius: 20px;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 0.9em;
             display: inline-block;
-            margin-top: 10px;
+            margin-right: 10px;
         }
 
         h2 {
             font-size: 1.5em;
+            font-weight: 500;
             color: var(--primary);
-            border-bottom: 2px solid var(--light);
+            border-bottom: 3px solid var(--brand-coral);
             padding-bottom: 10px;
             margin: 40px 0 20px 0;
         }
 
         h3 {
             font-size: 1.2em;
+            font-weight: 500;
             color: var(--secondary);
             margin: 25px 0 15px 0;
         }
 
         h4 {
             font-size: 1.1em;
+            font-weight: 500;
             color: var(--primary);
             margin: 20px 0 10px 0;
         }
@@ -115,7 +134,7 @@
             background: white;
             padding: 30px;
             border-radius: 12px;
-            border: 2px solid var(--primary);
+            box-shadow: 0 2px 12px rgba(0,74,74,0.08);
             margin-bottom: 40px;
             text-align: center;
         }
@@ -145,9 +164,9 @@
         }
 
         .detail-table th {
-            background: var(--primary);
-            color: white;
-            font-weight: 600;
+            background: var(--brand-jade);
+            color: var(--brand-white);
+            font-weight: 500;
         }
 
         .detail-table tr:hover {
@@ -208,13 +227,13 @@
         }
 
         .strengths-title {
-            color: #27ae60;
+            color: var(--brand-olive);
             font-weight: 600;
             margin: 15px 0 10px 0;
         }
 
         .weaknesses-title {
-            color: #e74c3c;
+            color: var(--brand-coral);
             font-weight: 600;
             margin: 15px 0 10px 0;
         }
@@ -237,8 +256,8 @@
             color: var(--primary);
         }
 
-        .strengths li::before { color: #27ae60; }
-        .weaknesses li::before { color: #e74c3c; }
+        .strengths li::before { color: var(--brand-olive); }
+        .weaknesses li::before { color: var(--brand-coral); }
 
         /* Demo Info Box Liste */
         .demo-info-list {
@@ -280,7 +299,8 @@
 
         .benchmark-table th {
             background: var(--secondary);
-            color: white;
+            color: var(--brand-white);
+            font-weight: 500;
         }
 
         .benchmark-subsection {
@@ -289,7 +309,7 @@
 
         .benchmark-subsection h4 {
             color: var(--secondary);
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid var(--brand-coral);
             padding-left: 15px;
         }
 
@@ -302,29 +322,43 @@
 
         .sources ol {
             padding-left: 20px;
+            columns: 2;
+            column-gap: 40px;
         }
 
         .sources li {
             padding: 5px 0;
             font-size: 0.9em;
+            break-inside: avoid;
         }
 
         .sources a {
-            color: var(--primary);
+            color: var(--brand-jade);
             text-decoration: none;
         }
 
         .sources a:hover {
+            color: var(--brand-coral);
             text-decoration: underline;
         }
 
         footer {
             margin-top: 60px;
-            padding-top: 20px;
-            border-top: 2px solid var(--light);
+            padding: 30px;
+            background: var(--brand-jade);
+            border-radius: 12px;
             text-align: center;
-            color: #666;
+            color: var(--brand-white);
             font-size: 0.9em;
+        }
+
+        footer a {
+            color: var(--brand-coral);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--brand-purple);
         }
 
         @media (max-width: 768px) {
@@ -338,7 +372,7 @@
 <body>
     <header>
         <h1>Nachhaltigkeitsanalyse</h1>
-        <div class="subtitle"><span class="demo-badge">DEMO-BEISPIEL</span> Muster GmbH</div>
+        <div class="subtitle">Muster GmbH</div>
         <div class="meta">
             <span>ESG Maturity Agent v3</span>
             <span>Analysedatum: 27. Dezember 2025</span>
@@ -346,18 +380,22 @@
         </div>
     </header>
 
-    <section style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 25px; margin-bottom: 30px;">
-        <h3 style="color: #856404; margin: 0 0 15px 0; font-size: 1.3em;">Willkommen beim ESG Maturity Agent Demo</h3>
-        <p style="margin-bottom: 15px;">Dies ist ein <strong>Beispielbericht</strong>, der zeigt, wie der ESG Maturity Agent Unternehmen analysiert und bewertet. Der Agent nutzt das wissenschaftlich fundierte <strong>Ainsbury-Grayson 5-Stages-of-Maturity-Modell</strong> (Cranfield University), um die Nachhaltigkeitsreife von Unternehmen systematisch zu bewerten.</p>
+    <!-- Demo-Hinweis Box - nur in der Demo-Version -->
+    <section style="background: var(--brand-coral); color: var(--brand-white); border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(252,110,69,0.3);">
+        <h3 style="color: var(--brand-white); margin: 0 0 15px 0; font-size: 1.4em; font-weight: 600; display: flex; align-items: center; gap: 10px;">
+            <span style="background: var(--brand-white); color: var(--brand-coral); padding: 4px 12px; border-radius: 6px; font-size: 0.7em; text-transform: uppercase; letter-spacing: 1px;">Demo</span>
+            Willkommen beim ESG Maturity Agent
+        </h3>
+        <p style="margin-bottom: 15px; opacity: 0.95;">Dies ist ein <strong>Beispielbericht</strong>, der zeigt, wie der ESG Maturity Agent Unternehmen analysiert und bewertet. Der Agent nutzt das wissenschaftlich fundierte <strong>Ainsbury-Grayson 5-Stages-of-Maturity-Modell</strong> (Cranfield University), um die Nachhaltigkeitsreife von Unternehmen systematisch zu bewerten.</p>
         <p style="margin-bottom: 15px;"><strong>Was der Agent macht:</strong></p>
-        <ul class="demo-info-list" style="margin-bottom: 15px;">
+        <ul class="demo-info-list" style="margin-bottom: 15px; opacity: 0.95;">
             <li>Recherchiert automatisch Nachhaltigkeitsinformationen aus Web-Quellen, Berichten und Pressemeldungen</li>
             <li>Überprüft die Rechercheergebnisse auf einen positiven Kommunikations-Bias und anhand von Greenwashing-Kriterien und gewichtet diese entsprechend</li>
             <li>Bewertet Unternehmen systematisch in 11 Embedding-Kategorien auf einer ordinalen Skala von 1 (Denier) bis 5 (Champion)</li>
             <li>Weist jeder Bewertung ein Konfidenz-Level zu, das angibt, wie verlässlich die Einschätzung ist</li>
             <li>Generiert interaktive HTML-Berichte mit Radar-Diagrammen</li>
         </ul>
-        <p style="margin-bottom: 0;"><strong>Hinweis:</strong> Die "Muster GmbH" ist ein fiktives Unternehmen. Dieser Bericht demonstriert das Format und die Analysemethodik des Agents. Mehr Informationen: <a href="https://github.com/romanmesicek/esg-maturity-agent" style="color: #856404; font-weight: bold;">github.com/romanmesicek/esg-maturity-agent</a></p>
+        <p style="margin-bottom: 0; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.3);"><strong>Hinweis:</strong> Die "Muster GmbH" ist ein fiktives Unternehmen. Dieser Bericht demonstriert das Format und die Analysemethodik des Agents. Mehr Informationen: <a href="https://github.com/romanmesicek/esg-maturity-agent" style="color: var(--brand-white); font-weight: 600; text-decoration: underline;">github.com/romanmesicek/esg-maturity-agent</a></p>
     </section>
 
     <section class="executive-summary">
@@ -382,7 +420,7 @@
         </table>
 
         <h3>Nachhaltigkeitsstrategie</h3>
-        <p style="font-style: italic; background: #f8f9fa; padding: 15px; border-left: 4px solid var(--primary); margin: 15px 0;">
+        <p style="font-style: italic; background: var(--light); padding: 15px; border-left: 4px solid var(--brand-olive); margin: 15px 0;">
             "Nachhaltigkeit ist für uns kein Trend, sondern gelebte Verantwortung gegenüber Gesellschaft und Umwelt. Wir verstehen wirtschaftlichen Erfolg und ökologische Verantwortung als zwei Seiten derselben Medaille."
         </p>
         <p><strong>Kernelemente der Strategie:</strong></p>
@@ -515,16 +553,16 @@
 
         <!-- Stärken und Entwicklungspotenziale -->
         <div class="analysis-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 30px;">
-            <div class="analysis-card" style="border-color: #27ae60;">
-                <h4 style="color: #27ae60;">Top 3 Stärken</h4>
+            <div class="analysis-card" style="border-color: var(--brand-olive);">
+                <h4 style="color: var(--brand-olive);">Top 3 Stärken</h4>
                 <ol class="strengths" style="list-style: decimal; padding-left: 20px;">
                     <li><strong>Führungsverankerung:</strong> Starkes Commitment der Geschäftsführung mit persönlichem Engagement und klarer Kommunikation zu Nachhaltigkeitsthemen. Der CEO nimmt regelmäßig an Brancheninitiativen teil und Führungskräfte haben messbare Nachhaltigkeitsziele in ihren Zielvereinbarungen verankert.</li>
                     <li><strong>Mitarbeiterengagement:</strong> Das Botschafter-Programm mit über 80 aktiven Mitarbeitenden schafft eine breite Verankerung im Unternehmen. Die Ideen-Plattform für Nachhaltigkeitsinitiativen fördert Bottom-up-Innovation und stärkt die Identifikation der Belegschaft mit den Unternehmenszielen.</li>
                     <li><strong>Strategische Integration:</strong> Nachhaltigkeit ist explizit in Vision und Werten verankert. Die Strategie bis 2030 enthält messbare Meilensteine und ESG-Kriterien fließen seit 2020 systematisch in strategische Entscheidungsprozesse ein.</li>
                 </ol>
             </div>
-            <div class="analysis-card" style="border-color: #e67e22;">
-                <h4 style="color: #e67e22;">Top 3 Entwicklungspotenziale</h4>
+            <div class="analysis-card" style="border-color: var(--brand-coral);">
+                <h4 style="color: var(--brand-coral);">Top 3 Entwicklungspotenziale</h4>
                 <ol class="weaknesses" style="list-style: decimal; padding-left: 20px;">
                     <li><strong>Value-Chain-Integration:</strong> Die Einbindung von Lieferanten beschränkt sich derzeit auf einen Verhaltenskodex ohne systematische Überprüfung. Scope-3-Emissionen werden nur teilweise erfasst. Eine stärkere Zusammenarbeit mit Kunden und Lieferanten würde das Nachhaltigkeitsprofil deutlich verbessern.</li>
                     <li><strong>Wissenschaftsbasierte Ziele:</strong> Die definierten Klimaziele sind ambitioniert, aber noch nicht durch die Science Based Targets initiative (SBTi) validiert. Eine externe Validierung würde die Glaubwürdigkeit erhöhen und das Unternehmen an internationalen Best Practices ausrichten.</li>
@@ -619,19 +657,39 @@
             <li>Strategiedokumente (öffentlich zugänglich)</li>
             <li>Interview-Notizen Nachhaltigkeitsmanagement</li>
         </ol>
-        <p style="margin-top: 15px; font-style: italic; color: #666;">
-            Hinweis: Dies ist ein fiktives Demo-Unternehmen zur Illustration der Analysemethodik.
-            Alle Daten sind anonymisiert und aus realen Analysen gemischt.
-        </p>
     </section>
 
     <!-- Methodik-Erklärung -->
-    <section style="background: #f8f9fa; padding: 30px; border-radius: 8px; margin-top: 40px;">
-        <h2>Das Ainsbury-Grayson-Modell</h2>
+    <section style="background: var(--light); padding: 30px; border-radius: 8px; margin-top: 40px; font-size: 0.9em;">
+        <h2 style="font-size: 1.4em;">Das Ainsbury-Grayson-Modell</h2>
         <p style="margin-bottom: 20px;">Das Modell von Richard Ainsbury und David Grayson (Cranfield University, 2014) beschreibt fünf Reifegradstufen der gesellschaftlichen Verantwortung. Die Bewertung erfolgt anhand von 11 Verankerungsbereichen, die systematisch analysiert werden:</p>
 
+        <h3 style="margin-bottom: 15px;">Die fünf Reifegradstufen</h3>
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 30px;">
+            <div style="background: var(--stage-1); color: white; padding: 12px; border-radius: 8px; text-align: center;">
+                <div style="font-weight: 600; font-size: 1.1em;">1 – Denier</div>
+                <div style="font-size: 0.85em; margin-top: 8px; opacity: 0.95;">Keine Verantwortung für soziale, ökologische oder wirtschaftliche Auswirkungen.</div>
+            </div>
+            <div style="background: var(--stage-2); color: white; padding: 12px; border-radius: 8px; text-align: center;">
+                <div style="font-weight: 600; font-size: 1.1em;">2 – Complier</div>
+                <div style="font-size: 0.85em; margin-top: 8px; opacity: 0.95;">Erfüllt gesetzliche Vorgaben und folgt branchenüblichen Praktiken.</div>
+            </div>
+            <div style="background: var(--stage-3); color: var(--primary); padding: 12px; border-radius: 8px; text-align: center;">
+                <div style="font-weight: 600; font-size: 1.1em;">3 – Risk Mitigator</div>
+                <div style="font-size: 0.85em; margin-top: 8px;">Identifiziert wesentliche Auswirkungen und reduziert negative Impacts zur Risikominimierung.</div>
+            </div>
+            <div style="background: var(--stage-4); color: white; padding: 12px; border-radius: 8px; text-align: center;">
+                <div style="font-weight: 600; font-size: 1.1em;">4 – Opportunity Maximiser</div>
+                <div style="font-size: 0.85em; margin-top: 8px; opacity: 0.95;">Sucht systematisch nach Geschäftschancen, die auch positive gesellschaftliche Wirkung haben.</div>
+            </div>
+            <div style="background: var(--stage-5); color: white; padding: 12px; border-radius: 8px; text-align: center;">
+                <div style="font-weight: 600; font-size: 1.1em;">5 – Champion</div>
+                <div style="font-size: 0.85em; margin-top: 8px; opacity: 0.95;">Verankert Nachhaltigkeit in der Wertschöpfungskette, kollaboriert und setzt sich für Veränderung ein.</div>
+            </div>
+        </div>
+
         <h3 style="margin-bottom: 15px;">Die 11 Verankerungsbereiche (Embedding Categories)</h3>
-        <table class="detail-table" style="margin-bottom: 30px;">
+        <table class="detail-table" style="margin-bottom: 0;">
             <tbody>
                 <tr><td style="width: 5%;"><strong>1</strong></td><td style="width: 35%;"><strong>Purpose, Vision, Values & Strategy</strong></td><td>Wie stark sind Nachhaltigkeitsziele in der Unternehmensvision, den Werten und der Gesamtstrategie verankert?</td></tr>
                 <tr><td><strong>2</strong></td><td><strong>Tone from the Top: Leadership</strong></td><td>Wie sichtbar und aktiv engagiert sich die Geschäftsführung für Nachhaltigkeitsthemen?</td></tr>
@@ -644,17 +702,6 @@
                 <tr><td><strong>9</strong></td><td><strong>Stakeholder Engagement, Communications</strong></td><td>Wie transparent und dialogorientiert kommuniziert das Unternehmen mit seinen Stakeholdern?</td></tr>
                 <tr><td><strong>10</strong></td><td><strong>Collaborations, Partnerships and Networks</strong></td><td>Wie aktiv beteiligt sich das Unternehmen an Brancheninitiativen und Partnerschaften?</td></tr>
                 <tr><td><strong>11</strong></td><td><strong>Specialist CR Function</strong></td><td>Wie ist die Nachhaltigkeitsfunktion organisatorisch aufgestellt und mit Ressourcen ausgestattet?</td></tr>
-            </tbody>
-        </table>
-
-        <h3 style="margin-bottom: 15px;">Die fünf Reifegradstufen</h3>
-        <table class="detail-table" style="margin-bottom: 0;">
-            <tbody>
-                <tr><td style="width: 25%;"><strong>1 – Denier</strong></td><td>Keine Verantwortung für soziale, ökologische oder wirtschaftliche Auswirkungen.</td></tr>
-                <tr><td><strong>2 – Complier</strong></td><td>Erfüllt gesetzliche Vorgaben und folgt branchenüblichen Praktiken.</td></tr>
-                <tr><td><strong>3 – Risk Mitigator</strong></td><td>Identifiziert wesentliche Auswirkungen und reduziert negative Impacts zur Risikominimierung.</td></tr>
-                <tr><td><strong>4 – Opportunity Maximiser</strong></td><td>Sucht systematisch nach Geschäftschancen, die auch positive gesellschaftliche Wirkung haben.</td></tr>
-                <tr><td><strong>5 – Champion</strong></td><td>Verankert Nachhaltigkeit in der Wertschöpfungskette, kollaboriert und setzt sich für Veränderung ein.</td></tr>
             </tbody>
         </table>
     </section>
@@ -690,10 +737,10 @@
         // Dynamische Farbe basierend auf Scores
         function getScoreColor(scores) {
             const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
-            if (avg < 2) return 'rgba(231, 76, 60, 0.7)';
-            if (avg < 3) return 'rgba(230, 126, 34, 0.7)';
-            if (avg < 4) return 'rgba(241, 196, 15, 0.7)';
-            return 'rgba(39, 174, 96, 0.7)';
+            if (avg < 2) return 'rgba(231, 76, 60, 1)';
+            if (avg < 3) return 'rgba(230, 126, 34, 1)';
+            if (avg < 4) return 'rgba(241, 196, 15, 1)';
+            return 'rgba(39, 174, 96, 1)';
         }
 
         const chartColor = getScoreColor(scores);
@@ -706,13 +753,13 @@
                     label: 'Muster GmbH',
                     data: scores,
                     fill: true,
-                    backgroundColor: chartColor.replace('0.7', '0.2'),
+                    backgroundColor: chartColor.replace(', 1)', ', 0.35)'),
                     borderColor: chartColor,
                     pointBackgroundColor: chartColor,
                     pointBorderColor: '#fff',
                     pointHoverBackgroundColor: '#fff',
                     pointHoverBorderColor: chartColor,
-                    borderWidth: 2
+                    borderWidth: 3
                 }]
             },
             options: {
