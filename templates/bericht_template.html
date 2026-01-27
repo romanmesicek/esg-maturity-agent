@@ -313,8 +313,8 @@
         <h1>Nachhaltigkeitsanalyse</h1>
         <div class="subtitle">{{FIRMENNAME}}</div>
         <div class="meta">
+            <span>ESG Maturity Agent v3</span>
             <span>Analysedatum: {{DATUM}}</span>
-            <span>Analyst: ESG Maturity Agent</span>
             <span>Quellen: {{ANZAHL_QUELLEN}}</span>
         </div>
     </header>
@@ -337,9 +337,12 @@
         {{NACHHALTIGKEITSSTRATEGIE}}
     </section>
 
-    <!-- Großes Radar-Diagramm am Anfang -->
-    <section class="radar-hero">
-        <h2>Ainsbury-Grayson Nachhaltigkeitsprofil</h2>
+    <!-- Nachhaltigkeitsprofil mit Radar-Diagramm -->
+    <section class="radar-hero" style="margin-top: 50px;">
+        <h2 style="font-size: 1.8em; margin-bottom: 20px;">Nachhaltigkeitsprofil nach Ainsbury-Grayson</h2>
+        <p style="max-width: 800px; margin: 0 auto 30px auto; color: #555; line-height: 1.7;">
+            Das Radar-Diagramm visualisiert das Nachhaltigkeitsprofil und zeigt Stärken sowie Entwicklungspotenziale auf einen Blick.
+        </p>
         <div class="radar-hero-container">
             <canvas id="radarChart"></canvas>
         </div>
@@ -379,45 +382,6 @@
                 <ol class="weaknesses" style="list-style: decimal; padding-left: 20px;">
                     {{TOP_ENTWICKLUNGSPOTENZIALE}}
                 </ol>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>Qualitative Analyse</h2>
-        <div class="analysis-grid">
-            <div class="analysis-card">
-                <h4>Strategie</h4>
-                <div class="strengths-title">Stärken</div>
-                <ul class="strengths">
-                    {{STRATEGIE_STAERKEN}}
-                </ul>
-                <div class="weaknesses-title">Schwächen</div>
-                <ul class="weaknesses">
-                    {{STRATEGIE_SCHWAECHEN}}
-                </ul>
-            </div>
-            <div class="analysis-card">
-                <h4>Prozesse</h4>
-                <div class="strengths-title">Stärken</div>
-                <ul class="strengths">
-                    {{PROZESSE_STAERKEN}}
-                </ul>
-                <div class="weaknesses-title">Schwächen</div>
-                <ul class="weaknesses">
-                    {{PROZESSE_SCHWAECHEN}}
-                </ul>
-            </div>
-            <div class="analysis-card">
-                <h4>Kommunikation</h4>
-                <div class="strengths-title">Stärken</div>
-                <ul class="strengths">
-                    {{KOMMUNIKATION_STAERKEN}}
-                </ul>
-                <div class="weaknesses-title">Schwächen</div>
-                <ul class="weaknesses">
-                    {{KOMMUNIKATION_SCHWAECHEN}}
-                </ul>
             </div>
         </div>
     </section>
@@ -470,11 +434,44 @@
         </ol>
     </section>
 
+    <!-- Methodik-Erklärung -->
+    <section style="background: #f8f9fa; padding: 30px; border-radius: 8px; margin-top: 40px;">
+        <h2>Das Ainsbury-Grayson-Modell</h2>
+        <p style="margin-bottom: 20px;">Das Modell von Richard Ainsbury und David Grayson (Cranfield University, 2014) beschreibt fünf Reifegradstufen der gesellschaftlichen Verantwortung. Die Bewertung erfolgt anhand von 11 Verankerungsbereichen, die systematisch analysiert werden:</p>
+
+        <h3 style="margin-bottom: 15px;">Die 11 Verankerungsbereiche (Embedding Categories)</h3>
+        <table class="detail-table" style="margin-bottom: 30px;">
+            <tbody>
+                <tr><td style="width: 5%;"><strong>1</strong></td><td style="width: 35%;"><strong>Purpose, Vision, Values & Strategy</strong></td><td>Wie stark sind Nachhaltigkeitsziele in der Unternehmensvision, den Werten und der Gesamtstrategie verankert?</td></tr>
+                <tr><td><strong>2</strong></td><td><strong>Tone from the Top: Leadership</strong></td><td>Wie sichtbar und aktiv engagiert sich die Geschäftsführung für Nachhaltigkeitsthemen?</td></tr>
+                <tr><td><strong>3</strong></td><td><strong>Board Oversight and Governance</strong></td><td>Wie ist Nachhaltigkeit in der Unternehmensführung und Aufsichtsratsarbeit verankert?</td></tr>
+                <tr><td><strong>4</strong></td><td><strong>Key Targets, Incentives and Measurement</strong></td><td>Gibt es messbare Ziele, Anreizsysteme und systematisches Monitoring für Nachhaltigkeitsleistungen?</td></tr>
+                <tr><td><strong>5</strong></td><td><strong>Embedded in Strategic Business Units</strong></td><td>Wie tief ist Nachhaltigkeit in den einzelnen Geschäftsbereichen und Funktionen integriert?</td></tr>
+                <tr><td><strong>6</strong></td><td><strong>Engaging Employees</strong></td><td>Wie werden Mitarbeitende eingebunden, informiert und für Nachhaltigkeit aktiviert?</td></tr>
+                <tr><td><strong>7</strong></td><td><strong>Energising the Value Chain</strong></td><td>Wie werden Lieferanten, Kunden und Partner in die Nachhaltigkeitsaktivitäten einbezogen?</td></tr>
+                <tr><td><strong>8</strong></td><td><strong>Skills, Knowledge Management and Training</strong></td><td>Wie werden Nachhaltigkeitskompetenzen aufgebaut, geteilt und weiterentwickelt?</td></tr>
+                <tr><td><strong>9</strong></td><td><strong>Stakeholder Engagement, Communications</strong></td><td>Wie transparent und dialogorientiert kommuniziert das Unternehmen mit seinen Stakeholdern?</td></tr>
+                <tr><td><strong>10</strong></td><td><strong>Collaborations, Partnerships and Networks</strong></td><td>Wie aktiv beteiligt sich das Unternehmen an Brancheninitiativen und Partnerschaften?</td></tr>
+                <tr><td><strong>11</strong></td><td><strong>Specialist CR Function</strong></td><td>Wie ist die Nachhaltigkeitsfunktion organisatorisch aufgestellt und mit Ressourcen ausgestattet?</td></tr>
+            </tbody>
+        </table>
+
+        <h3 style="margin-bottom: 15px;">Die fünf Reifegradstufen</h3>
+        <table class="detail-table" style="margin-bottom: 0;">
+            <tbody>
+                <tr><td style="width: 25%;"><strong>1 – Denier</strong></td><td>Keine Verantwortung für soziale, ökologische oder wirtschaftliche Auswirkungen.</td></tr>
+                <tr><td><strong>2 – Complier</strong></td><td>Erfüllt gesetzliche Vorgaben und folgt branchenüblichen Praktiken.</td></tr>
+                <tr><td><strong>3 – Risk Mitigator</strong></td><td>Identifiziert wesentliche Auswirkungen und reduziert negative Impacts zur Risikominimierung.</td></tr>
+                <tr><td><strong>4 – Opportunity Maximiser</strong></td><td>Sucht systematisch nach Geschäftschancen, die auch positive gesellschaftliche Wirkung haben.</td></tr>
+                <tr><td><strong>5 – Champion</strong></td><td>Verankert Nachhaltigkeit in der Wertschöpfungskette, kollaboriert und setzt sich für Veränderung ein.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
     <footer>
         <p>Analyse basierend auf dem Ainsbury-Grayson 5-Stages-of-Maturity-Modell</p>
         <p>Doughty Centre for Corporate Responsibility, Cranfield University (2014)</p>
-        <p>Programmierung und Optimierung: Roman Mesicek | <a href="https://www.mesicek.com" target="_blank">www.mesicek.com</a></p>
-        <p>Generiert mit ESG Maturity Agent</p>
+        <p><a href="https://36sustainability.org" target="_blank">36sustainability.org</a></p>
     </footer>
 
     <script>
