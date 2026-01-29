@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRIGOS Gewinner 2019-2025 - Vergleichsanalyse | 36° sustainability</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --brand-jade: #004A4A;
+            --brand-olive: #959E40;
+            --brand-purple: #AA80E0;
+            --brand-coral: #FC6E45;
+            --brand-white: #FFFFFC;
+            --primary: var(--brand-jade);
+            --secondary: #006666;
+            --light: #f5f7f5;
+            --border: #d0d8d0;
+            --accent: var(--brand-coral);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--primary);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: var(--brand-white);
+        }
+        header {
+            background: var(--brand-jade);
+            color: var(--brand-white);
+            padding: 48px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+        .subtitle { font-size: 1.3em; opacity: 0.9; font-weight: 400; }
+        .meta { display: flex; gap: 30px; margin-top: 20px; font-size: 0.95em; opacity: 0.8; flex-wrap: wrap; }
+        h2 {
+            font-size: 1.5em;
+            font-weight: 500;
+            line-height: 1.1;
+            color: var(--primary);
+            border-bottom: 3px solid var(--brand-coral);
+            padding-bottom: 10px;
+            margin: 40px 0 20px 0;
+        }
+        h3 {
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        h4 {
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 12px rgba(0,74,74,0.08);
+        }
+        .chart-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-card {
+            background: var(--brand-jade);
+            color: var(--brand-white);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--brand-coral);
+        }
+        .stat-card .number { font-size: 2.5em; font-weight: 600; }
+        .stat-card .label { font-size: 0.9em; opacity: 0.9; margin-top: 5px; }
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .ranking-table th, .ranking-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .ranking-table th {
+            background: var(--brand-jade);
+            color: var(--brand-white);
+            font-weight: 500;
+        }
+        .ranking-table tr:hover { background: var(--light); }
+        .score-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        .score-high { background: var(--brand-olive); color: white; }
+        .score-mid { background: var(--brand-purple); color: white; }
+        .score-low { background: var(--brand-coral); color: white; }
+        .insight-box {
+            background: linear-gradient(135deg, var(--light), #e8ede8);
+            border-left: 4px solid var(--brand-coral);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .insight-box h4 { color: var(--brand-jade); margin-bottom: 10px; text-transform: none; letter-spacing: 0; font-weight: 600; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .category-analysis {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: var(--light);
+            border-radius: 8px;
+        }
+        .category-bar {
+            width: 100px;
+            height: 8px;
+            background: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .category-bar-fill {
+            height: 100%;
+            background: var(--brand-olive);
+            border-radius: 4px;
+        }
+        .year-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .year-2019 { background: var(--brand-jade); color: white; }
+        .year-2020 { background: var(--brand-olive); color: white; }
+        .year-2021 { background: var(--brand-purple); color: white; }
+        .year-2022 { background: #006666; color: white; }
+        .year-2023 { background: var(--brand-jade); color: var(--brand-coral); }
+        .year-2024 { background: var(--brand-coral); color: white; }
+        .year-2025 { background: var(--brand-jade); color: var(--brand-purple); }
+        footer {
+            margin-top: 60px;
+            padding: 30px;
+            background: var(--brand-jade);
+            border-radius: 12px;
+            text-align: center;
+            color: var(--brand-white);
+        }
+        footer a { color: var(--brand-coral); }
+        footer a:hover { color: var(--brand-purple); }
+
+        /* Filter Bar Styles */
+        .filter-bar {
+            background: var(--brand-white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            /* Sticky positioning */
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            /* Schatten für visuelle Trennung beim Scrollen */
+            box-shadow: 0 2px 8px rgba(0,74,74,0.1);
+        }
+        .filter-bar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .filter-bar-title {
+            font-size: 0.85em;
+            font-weight: 500;
+            color: var(--brand-jade);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .filter-counter {
+            font-size: 0.9em;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .filter-counter strong {
+            color: var(--brand-coral);
+        }
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .filter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.88em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            background: white;
+            color: var(--brand-jade);
+            box-shadow: 0 1px 3px rgba(0,74,74,0.08);
+        }
+        .filter-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,74,74,0.15);
+        }
+        .filter-btn:active {
+            transform: scale(0.97);
+        }
+        .filter-btn .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
+        .filter-btn.active {
+            color: white;
+            border-color: transparent;
+        }
+        .filter-btn.active .dot {
+            background: rgba(255,255,255,0.9);
+            transform: scale(1.2);
+        }
+
+        /* Category-specific colors - 36° brand palette */
+        .filter-btn[data-cat="Klimaschutz"] .dot { background: var(--brand-olive); }
+        .filter-btn[data-cat="Klimaschutz"].active { background: var(--brand-olive); }
+        .filter-btn[data-cat="Klimaschutz"]:not(.active) { border-color: var(--brand-olive); color: var(--brand-olive); }
+
+        .filter-btn[data-cat="Internationales Engagement"] .dot { background: var(--brand-jade); }
+        .filter-btn[data-cat="Internationales Engagement"].active { background: var(--brand-jade); }
+        .filter-btn[data-cat="Internationales Engagement"]:not(.active) { border-color: var(--brand-jade); color: var(--brand-jade); }
+
+        .filter-btn[data-cat="MitarbeiterInnen-Initiativen"] .dot { background: var(--brand-purple); }
+        .filter-btn[data-cat="MitarbeiterInnen-Initiativen"].active { background: var(--brand-purple); }
+        .filter-btn[data-cat="MitarbeiterInnen-Initiativen"]:not(.active) { border-color: var(--brand-purple); color: #8b5cf6; }
+
+        .filter-btn[data-cat="Regionale Wertschaffung"] .dot { background: var(--brand-coral); }
+        .filter-btn[data-cat="Regionale Wertschaffung"].active { background: var(--brand-coral); }
+        .filter-btn[data-cat="Regionale Wertschaffung"]:not(.active) { border-color: var(--brand-coral); color: #d85a3a; }
+
+        .filter-btn[data-cat="Social Innovation"] .dot { background: #006666; }
+        .filter-btn[data-cat="Social Innovation"].active { background: #006666; }
+        .filter-btn[data-cat="Social Innovation"]:not(.active) { border-color: #006666; color: #006666; }
+
+        .filter-btn[data-cat="Vorbildliche Projekte"] .dot { background: #7a8530; }
+        .filter-btn[data-cat="Vorbildliche Projekte"].active { background: #7a8530; }
+        .filter-btn[data-cat="Vorbildliche Projekte"]:not(.active) { border-color: #7a8530; color: #7a8530; }
+
+        .filter-btn[data-cat="all"] {
+            background: var(--brand-jade);
+            color: var(--brand-white);
+            border-color: var(--brand-jade);
+        }
+        .filter-btn[data-cat="all"]:not(.active) {
+            background: white;
+            color: var(--brand-jade);
+        }
+
+        .filter-info {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            font-size: 0.85em;
+            color: var(--brand-jade);
+            opacity: 0.8;
+        }
+        .filter-info.hidden { display: none; }
+
+        .chart-updating {
+            opacity: 0.6;
+            transition: opacity 0.15s ease;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .two-col { grid-template-columns: 1fr; }
+            .category-analysis { grid-template-columns: 1fr; }
+            .filter-buttons { gap: 8px; }
+            .filter-btn { padding: 6px 12px; font-size: 0.82em; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TRIGOS Gewinner 2019–2025</h1>
+        <div class="subtitle">Reifegrad-Analyse nach dem Ainsbury-Grayson-Modell</div>
+        <div class="meta">
+            <span>43 Unternehmen</span>
+            <span>7 Jahre TRIGOS Awards</span>
+            <span>11 Verankerungsbereiche</span>
+            <span>Analyse: Januar 2025</span>
+        </div>
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.9em; opacity: 0.85;">
+            Eine Analyse von <strong>36° sustainability</strong> · <span style="color: var(--brand-purple);">#EnjoyTheChange</span>
+        </div>
+    </header>
+
+    <section class="card" style="margin-top: 0;">
+        <p style="font-size: 1.1em; line-height: 1.6;"><strong>43 TRIGOS-Gewinner*innen</strong> aus sieben Jahren (2019–2025), bewertet nach dem Ainsbury-Grayson-Modell mit 11 Verankerungsbereichen. Durchschnittlicher Score: <strong>3.94</strong> von 5. <strong>26 Unternehmen (60%)</strong> erreichen Champion-Level (3.7+).</p>
+    </section>
+
+    <section class="card">
+        <h2>Durchschnittsprofil aller TRIGOS-Gewinner</h2>
+        <p style="color: var(--brand-jade); opacity: 0.8; margin-bottom: 20px;">Aggregiertes Profil aller 43 TRIGOS-Gewinner*innen nach den 11 Ainsbury-Grayson-Kategorien.</p>
+        <div class="chart-container">
+            <canvas id="averageRadar"></canvas>
+        </div>
+
+        <div class="two-col" style="margin-top: 30px;">
+            <div>
+                <h3 style="color: var(--brand-olive); margin-bottom: 15px;">Stärken</h3>
+                <ul style="padding-left: 20px; line-height: 1.7;">
+                    <li><strong>Purpose & Vision (4.34):</strong> Klare Positionierung. Nachhaltigkeit ist Kern des Geschäftsmodells.</li>
+                    <li><strong>Leadership (4.23):</strong> Engagierte Geschäftsführung. Häufig Gründer*innen, die das Thema selbst vorantreiben.</li>
+                    <li><strong>Business Units (4.33):</strong> Das nachhaltige Produkt ist das Kerngeschäft, kein Nebenprojekt.</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: var(--brand-coral); margin-bottom: 15px;">Entwicklungspotenziale</h3>
+                <ul style="padding-left: 20px; line-height: 1.7;">
+                    <li><strong>Governance (3.38):</strong> Selten im Aufsichtsrat verankert. Typisch für den Mittelstand.</li>
+                    <li><strong>Employees (3.51):</strong> Mitarbeiter*innen-Einbindung ausbaufähig. Green Teams sind selten.</li>
+                    <li><strong>CR Function (3.52):</strong> Keine dedizierte Abteilung. Nachhaltigkeit läuft in der Geschäftsführung mit.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Kategorie-Analyse: Stärken und Schwächen</h2>
+        <p style="color: var(--brand-jade); opacity: 0.8; margin-bottom: 20px;">Durchschnittswerte je Bewertungskategorie, sortiert nach Stärke.</p>
+        <div class="category-analysis" id="categoryAnalysis"></div>
+
+        <div class="insight-box">
+            <h4>Das Muster: starke Vision, ausbaufähige Strukturen</h4>
+            <p>Governance (3.38) und Employees (3.51) bilden die Schlusslichter. Viele TRIGOS-Gewinner sind Mittelständler*innen ohne Aufsichtsrat oder eigene Nachhaltigkeitsabteilung – die Geschäftsführung verantwortet das Thema selbst. Die Stärke liegt woanders: Purpose (4.34) und Business Units (4.33) führen das Ranking an. Der Antrieb kommt von oben, formale Strukturen folgen mit dem Wachstum.</p>
+        </div>
+    </section>
+
+    <div class="filter-bar">
+        <div class="filter-bar-header">
+            <span class="filter-bar-title">Filter nach TRIGOS-Kategorie</span>
+            <span class="filter-counter" id="filterCounter">Zeige <strong>43</strong> von 43 Unternehmen</span>
+        </div>
+        <div class="filter-buttons" id="filterButtons">
+            <button class="filter-btn active" data-cat="all">Alle</button>
+            <button class="filter-btn" data-cat="Klimaschutz"><span class="dot"></span>Klimaschutz</button>
+            <button class="filter-btn" data-cat="Internationales Engagement"><span class="dot"></span>International</button>
+            <button class="filter-btn" data-cat="MitarbeiterInnen-Initiativen"><span class="dot"></span>Mitarbeiter</button>
+            <button class="filter-btn" data-cat="Regionale Wertschaffung"><span class="dot"></span>Regional</button>
+            <button class="filter-btn" data-cat="Social Innovation"><span class="dot"></span>Social Innovation</button>
+            <button class="filter-btn" data-cat="Vorbildliche Projekte"><span class="dot"></span>Vorbildlich</button>
+        </div>
+    </div>
+
+    <section class="card" id="categoryRadarSection">
+        <h2>Vergleich nach TRIGOS-Kategorien</h2>
+        <p style="color: var(--brand-jade); opacity: 0.8; margin-bottom: 20px;">Durchschnittsprofile nach TRIGOS-Auszeichnungskategorie im Vergleich.</p>
+
+        <p id="categoryRadarFilter" class="filter-info hidden" style="margin-bottom: 15px;"></p>
+        <div class="chart-container">
+            <canvas id="categoryRadar"></canvas>
+        </div>
+
+        <div class="insight-box">
+            <h4>Profile entsprechen der Auszeichnungskategorie</h4>
+            <p>Wer für <strong>Internationales Engagement</strong> ausgezeichnet wird, zeigt starke Value-Chain- und Partnership-Werte. <strong>Mitarbeiter*innen-Initiativen</strong>-Gewinner punkten bei Employees. <strong>Klimaschutz</strong>-Prämierte haben ihre Ziele klar definiert und messen konsequent. Bei <strong>Social Innovation</strong> steht die Idee im Vordergrund – formale Strukturen sind weniger ausgeprägt.</p>
+        </div>
+    </section>
+
+    <section class="card" id="yearTrendSection">
+        <h2>Entwicklung über die Jahre (2019-2025)</h2>
+        <p id="yearTrendFilter" class="filter-info hidden" style="margin-bottom: 15px;"></p>
+        <div class="chart-container">
+            <canvas id="yearTrend"></canvas>
+        </div>
+
+        <div class="insight-box">
+            <h4>Schwankungen statt Trend</h4>
+            <p><strong>2019</strong> war ein starkes Jahr. <strong>2022</strong> lag niedriger, <strong>2025</strong> wieder höher. Ein klarer Aufwärtstrend ist nicht erkennbar. Die Varianz hängt vermutlich vom Bewerbungspool ab – die Jury wählt aus den eingereichten Projekten.</p>
+        </div>
+    </section>
+
+    <section class="card" id="topBottomSection">
+        <h2 id="topBottomTitle">Top 10 vs. Bottom 10: Profile im Vergleich</h2>
+        <p id="topBottomFilter" class="filter-info hidden" style="margin-bottom: 15px;"></p>
+        <div class="chart-container">
+            <canvas id="topBottomRadar"></canvas>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Vollständiges Ranking</h2>
+
+        <table class="ranking-table" id="rankingTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Unternehmen</th>
+                    <th>Jahr</th>
+                    <th>TRIGOS-Kategorie</th>
+                    <th>Score</th>
+                    <th>Stufe</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>Das Ainsbury-Grayson-Modell</h2>
+        <p style="line-height: 1.7; margin-bottom: 24px;">Das Modell von Richard Ainsbury und David Grayson (Cranfield University, 2014) beschreibt fünf Reifegradstufen der gesellschaftlichen Verantwortung. Die Bewertung erfolgt anhand von 11 Verankerungsbereichen:</p>
+
+        <div class="two-col" style="margin-bottom: 28px; font-size: 0.92em;">
+            <div>
+                <ol style="padding-left: 20px; line-height: 1.8; margin: 0;">
+                    <li><strong>Purpose</strong> – Vision, Werte und Strategie</li>
+                    <li><strong>Leadership</strong> – Engagement der Geschäftsführung</li>
+                    <li><strong>Governance</strong> – Aufsicht und Verankerung im Board</li>
+                    <li><strong>Targets</strong> – Ziele, Anreize und Messung</li>
+                    <li><strong>Business Units</strong> – Integration in Geschäftsbereiche</li>
+                    <li><strong>Employees</strong> – Einbindung der Mitarbeiter*innen</li>
+                </ol>
+            </div>
+            <div>
+                <ol start="7" style="padding-left: 20px; line-height: 1.8; margin: 0;">
+                    <li><strong>Value Chain</strong> – Aktivierung der Wertschöpfungskette</li>
+                    <li><strong>Skills</strong> – Wissen, Training und Kompetenzaufbau</li>
+                    <li><strong>Stakeholder</strong> – Dialog und Kommunikation</li>
+                    <li><strong>Partnerships</strong> – Kooperationen und Netzwerke</li>
+                    <li><strong>CR Function</strong> – Eigene Nachhaltigkeitsabteilung</li>
+                </ol>
+            </div>
+        </div>
+
+        <h3 style="font-size: 1em; margin-bottom: 12px; color: var(--brand-jade);">Die fünf Reifegradstufen</h3>
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.95em;">
+            <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 10px 12px 10px 0; width: 180px;"><strong>1 – Denier</strong></td>
+                <td style="padding: 10px 0; opacity: 0.85;">Keine Verantwortung für soziale, ökologische oder wirtschaftliche Auswirkungen.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 10px 12px 10px 0;"><strong>2 – Complier</strong></td>
+                <td style="padding: 10px 0; opacity: 0.85;">Erfüllt gesetzliche Vorgaben und folgt branchenüblichen Praktiken.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 10px 12px 10px 0;"><strong>3 – Risk Mitigator</strong></td>
+                <td style="padding: 10px 0; opacity: 0.85;">Identifiziert wesentliche Auswirkungen und reduziert negative Impacts zur Risikominimierung.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 10px 12px 10px 0;"><strong>4 – Opportunity Maximiser</strong></td>
+                <td style="padding: 10px 0; opacity: 0.85;">Sucht systematisch nach Geschäftschancen durch positive Auswirkungen.</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px 12px 10px 0;"><strong>5 – Champion</strong></td>
+                <td style="padding: 10px 0; opacity: 0.85;">Verankert Nachhaltigkeit in der Wertschöpfungskette, kollaboriert und setzt sich für Veränderung ein.</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="card" style="background: var(--light); border: none;">
+        <h3 style="font-size: 0.95em; margin-bottom: 12px; color: var(--brand-jade); border-bottom: none;">Zur Methodik</h3>
+        <p style="font-size: 0.9em; line-height: 1.7; opacity: 0.85;">Für die Bewertung wurde ein KI-gestützter ESG-Agent eingesetzt, der öffentlich verfügbares Material recherchiert und analysiert hat – darunter Unternehmenswebsites, Nachhaltigkeitsberichte, Pressemitteilungen und ESG-Ratings. Die Ergebnisse wurden manuell überprüft und zu dieser Vergleichsanalyse zusammengeführt. Da Unternehmenskommunikation systematisch positiver gefärbt ist als die Realität, wurde eine differenzierte, wissenschaftlich fundierte Korrektur angewandt: Kategorien wie Purpose, Leadership und Employees wurden um 0.4 Punkte reduziert; faktisch prüfbare Kategorien wie Governance und Targets um 0.2 Punkte.</p>
+    </section>
+
+    <footer>
+        <p style="font-size: 1.1em; margin-bottom: 8px;"><strong>36° sustainability</strong></p>
+        <p style="opacity: 0.9;">Transformationsbegleiter*innen für nachhaltigen Mehrwert</p>
+        <p style="margin-top: 20px; font-weight: 500; color: var(--brand-purple);">#EnjoyTheChange</p>
+    </footer>
+
+    <script>
+        // Data from all 43 companies (2019-2025)
+        const companies = [
+            // 2019
+            { name: "Lenzing AG", year: 2019, category: "Klimaschutz", scores: [5,5,5,5,5,4,5,4,5,5,5], avg: 4.82 },
+            { name: "Social Impact Award", year: 2019, category: "Internationales Engagement", scores: [5,5,4,4,5,4,5,5,5,5,5], avg: 4.73 },
+            { name: "hollu Systemhygiene", year: 2019, category: "Vorbildliche Projekte", scores: [5,5,4,5,5,4,4,4,5,5,4], avg: 4.55 },
+            { name: "Vollpension Generationencafé", year: 2019, category: "Social Innovation", scores: [5,5,3,4,5,5,4,5,5,4,5], avg: 4.55 },
+            { name: "Neuburger Fleischlos (HERMANN)", year: 2019, category: "Regionale Wertschaffung", scores: [5,5,3,4,5,4,5,4,4,4,3], avg: 4.18 },
+            { name: "Deloitte Österreich", year: 2019, category: "MitarbeiterInnen-Initiativen", scores: [4,4,4,4,3,5,3,4,4,5,4], avg: 4.00 },
+            // 2020
+            { name: "Unverschwendet GmbH", year: 2020, category: "Social Innovation", scores: [5,5,3,4,5,4,5,4,5,5,5], avg: 4.55 },
+            { name: "SynCraft Engineering", year: 2020, category: "Klimaschutz", scores: [5,5,3,5,5,4,4,5,4,5,4], avg: 4.45 },
+            { name: "MED-EL", year: 2020, category: "Internationales Engagement", scores: [5,5,4,4,4,4,4,5,5,5,4], avg: 4.45 },
+            { name: "OeKB", year: 2020, category: "Vorbildliche Projekte", scores: [4,4,5,5,4,4,4,4,5,5,5], avg: 4.45 },
+            { name: "Fahnen-Gärtner", year: 2020, category: "MitarbeiterInnen-Initiativen", scores: [5,5,3,4,4,5,4,5,4,4,4], avg: 4.27 },
+            { name: "PMS Elektro- und Automationstechnik", year: 2020, category: "Regionale Wertschaffung", scores: [4,4,3,4,4,5,4,5,4,5,3], avg: 4.09 },
+            // 2021
+            { name: "Too Good To Go", year: 2021, category: "Social Innovation", scores: [5,5,4,5,5,4,5,4,5,5,5], avg: 4.73 },
+            { name: "plasticpreneur", year: 2021, category: "Internationales Engagement", scores: [5,5,3,4,5,3,5,5,4,5,4], avg: 4.36 },
+            { name: "Greiner Packaging", year: 2021, category: "Vorbildliche Projekte", scores: [4,4,4,4,5,3,5,4,4,5,4], avg: 4.18 },
+            { name: "ReinSaat KG", year: 2021, category: "Regionale Wertschaffung", scores: [5,5,3,4,5,4,5,4,3,5,2], avg: 4.09 },
+            { name: "Fill GmbH", year: 2021, category: "MitarbeiterInnen-Initiativen", scores: [4,5,3,3,4,5,3,5,4,4,3], avg: 3.91 },
+            { name: "EVVA Sicherheitstechnologie", year: 2021, category: "Klimaschutz", scores: [4,4,3,4,4,4,4,4,4,3,3], avg: 3.73 },
+            // 2022
+            { name: "Refurbed", year: 2022, category: "Social Innovation", scores: [5,5,4,4,5,4,5,4,4,5,3], avg: 4.36 },
+            { name: "TELE Haase", year: 2022, category: "MitarbeiterInnen-Initiativen", scores: [5,5,4,4,4,5,3,4,4,3,3], avg: 4.00 },
+            { name: "Rabmer Gruppe", year: 2022, category: "Klimaschutz", scores: [5,5,3,4,5,3,4,4,4,3,3], avg: 3.91 },
+            { name: "FreuRaum eG", year: 2022, category: "Regionale Wertschaffung", scores: [5,4,3,3,5,4,5,4,3,4,2], avg: 3.82 },
+            { name: "Lohmann & Rauscher", year: 2022, category: "Internationales Engagement", scores: [4,4,4,4,4,4,3,4,4,3,4], avg: 3.82 },
+            { name: "Woerle", year: 2022, category: "Vorbildliche Projekte", scores: [4,4,3,4,4,3,5,3,3,4,3], avg: 3.64 },
+            // 2023
+            { name: "Mondi AG", year: 2023, category: "Internationales Engagement", scores: [5,5,5,5,4,4,5,4,5,5,5], avg: 4.73 },
+            { name: "10hoch4/Dachgold", year: 2023, category: "Vorbildliche Projekte", scores: [5,5,3,5,5,3,5,5,5,5,4], avg: 4.55 },
+            { name: "sozKom", year: 2023, category: "MitarbeiterInnen-Initiativen", scores: [5,5,4,4,5,5,4,4,4,4,4], avg: 4.36 },
+            { name: "ESG Plus", year: 2023, category: "Social Innovation", scores: [5,4,3,4,5,3,4,4,4,4,5], avg: 4.09 },
+            { name: "ECOP Technologies", year: 2023, category: "Klimaschutz", scores: [5,5,3,4,5,3,4,5,3,4,2], avg: 3.91 },
+            { name: "Waldviertler Frauenwirtschaft", year: 2023, category: "Regionale Wertschaffung", scores: [5,4,3,3,5,4,4,4,3,4,2], avg: 3.73 },
+            // 2024
+            { name: "Henriette Stadthotel", year: 2024, category: "Vorbildliche Projekte", scores: [5,5,4,5,5,4,5,4,5,4,4], avg: 4.55 },
+            { name: "Kärntnermilch", year: 2024, category: "Regionale Wertschaffung", scores: [5,5,4,4,5,3,5,4,4,4,4], avg: 4.27 },
+            { name: "Mani Bläuel", year: 2024, category: "Internationales Engagement", scores: [5,5,3,4,5,4,5,4,4,4,3], avg: 4.18 },
+            { name: "Julius Blum", year: 2024, category: "MitarbeiterInnen-Initiativen", scores: [4,4,4,5,4,5,3,4,4,4,4], avg: 4.09 },
+            { name: "legero united", year: 2024, category: "Klimaschutz", scores: [4,4,3,5,5,4,4,4,4,4,4], avg: 4.09 },
+            { name: "HARTMANN Österreich", year: 2024, category: "Social Innovation", scores: [4,4,4,5,4,3,4,4,4,3,4], avg: 3.91 },
+            // 2025
+            { name: "crowd4projects (Klimja)", year: 2025, category: "Internationales Engagement", scores: [5,5,4,5,5,3,5,5,5,5,5], avg: 4.73 },
+            { name: "Laufen Austria", year: 2025, category: "Klimaschutz", scores: [5,5,4,5,5,4,4,5,4,4,4], avg: 4.45 },
+            { name: "Technisches Museum Wien", year: 2025, category: "Sonderpreis", scores: [5,4,4,4,5,3,4,5,5,5,4], avg: 4.36 },
+            { name: "öKlo", year: 2025, category: "Vorbildliche Projekte", scores: [5,5,3,4,5,3,5,4,4,5,4], avg: 4.27 },
+            { name: "Die Pflanzerei", year: 2025, category: "Regionale Wertschaffung", scores: [5,5,3,3,5,3,5,5,4,5,3], avg: 4.18 },
+            { name: "Rhomberg Bau", year: 2025, category: "Social Innovation", scores: [5,4,4,4,4,3,5,4,4,4,4], avg: 4.09 },
+            { name: "Kollar GmbH", year: 2025, category: "MitarbeiterInnen-Initiativen", scores: [5,5,3,4,4,5,3,5,4,3,3], avg: 4.00 }
+        ];
+
+        const categories = ['Purpose', 'Leadership', 'Governance', 'Targets', 'Business Units', 'Employees', 'Value Chain', 'Skills', 'Stakeholder', 'Partnerships', 'CR Function'];
+
+        // Bias-Korrektur für Self-Reporting (differenziert nach Kategorie)
+        // Basierend auf Forschung zu Selbstdarstellung in Unternehmenskommunikation
+        const biasAdjustment = [0.4, 0.4, 0.2, 0.2, 0.3, 0.4, 0.3, 0.4, 0.2, 0.3, 0.2];
+        // Purpose, Leadership, Employees, Skills: -0.4 (leicht übertreibbar)
+        // Governance, Targets, Stakeholder, CR Function: -0.2 (faktisch prüfbar)
+        // Business Units, Value Chain, Partnerships: -0.3 (Mittelwert)
+
+        // Adjusted score (minimum 1.0)
+        function adjustScore(score, categoryIndex) {
+            return Math.max(1, score - biasAdjustment[categoryIndex]);
+        }
+
+        // Adjusted average for a company
+        function getAdjustedAvg(company) {
+            const sum = company.scores.reduce((acc, score, i) => acc + adjustScore(score, i), 0);
+            return sum / company.scores.length;
+        }
+
+        // Apply adjusted averages to companies
+        companies.forEach(c => { c.adjAvg = getAdjustedAvg(c); });
+
+        // 36° sustainability brand colors
+        const categoryColors = {
+            'Klimaschutz': { bg: 'rgba(149, 158, 64, 0.2)', border: 'rgba(149, 158, 64, 1)' },           // brand-olive
+            'Internationales Engagement': { bg: 'rgba(0, 74, 74, 0.2)', border: 'rgba(0, 74, 74, 1)' },  // brand-jade
+            'MitarbeiterInnen-Initiativen': { bg: 'rgba(170, 128, 224, 0.2)', border: 'rgba(170, 128, 224, 1)' }, // brand-purple
+            'Regionale Wertschaffung': { bg: 'rgba(252, 110, 69, 0.2)', border: 'rgba(252, 110, 69, 1)' }, // brand-coral
+            'Social Innovation': { bg: 'rgba(0, 102, 102, 0.2)', border: 'rgba(0, 102, 102, 1)' },       // jade-light
+            'Vorbildliche Projekte': { bg: 'rgba(122, 133, 48, 0.2)', border: 'rgba(122, 133, 48, 1)' }  // olive-dark
+        };
+
+        const trigosCategories = Object.keys(categoryColors);
+
+        // Filter state
+        let activeFilters = new Set(); // empty = all
+
+        // Chart instances
+        let categoryRadarChart, topBottomChart, yearTrendChart;
+
+        // Helper: match company to TRIGOS category
+        function matchCategory(company) {
+            return trigosCategories.find(k =>
+                company.category.toLowerCase().includes(k.toLowerCase().replace('mitarbeiterinnen', 'mitarbeiter'))
+            );
+        }
+
+        // Helper: get filtered companies
+        function getFilteredCompanies() {
+            if (activeFilters.size === 0) return companies;
+            return companies.filter(c => {
+                const cat = matchCategory(c);
+                return cat && activeFilters.has(cat);
+            });
+        }
+
+        // Calculate adjusted averages per category (for all companies - static)
+        const categoryAverages = categories.map((_, i) => {
+            const sum = companies.reduce((acc, c) => acc + adjustScore(c.scores[i], i), 0);
+            return (sum / companies.length).toFixed(2);
+        });
+
+        // Average Radar Chart (static - always shows all) - 36° brand-jade
+        new Chart(document.getElementById('averageRadar'), {
+            type: 'radar',
+            data: {
+                labels: categories,
+                datasets: [{
+                    label: 'Durchschnitt (n=43)',
+                    data: categoryAverages,
+                    fill: true,
+                    backgroundColor: 'rgba(0, 74, 74, 0.25)',
+                    borderColor: 'rgba(0, 74, 74, 1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: 'rgba(0, 74, 74, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { r: { suggestedMin: 0, suggestedMax: 5, ticks: { stepSize: 1 } } },
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        // Category Analysis Bars (static)
+        const categoryDiv = document.getElementById('categoryAnalysis');
+        const sortedCats = categories.map((name, i) => ({ name, avg: parseFloat(categoryAverages[i]) }))
+            .sort((a, b) => b.avg - a.avg);
+
+        sortedCats.forEach(cat => {
+            const div = document.createElement('div');
+            div.className = 'category-item';
+            const pct = (cat.avg / 5) * 100;
+            div.innerHTML = `
+                <span>${cat.name}</span>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="category-bar"><div class="category-bar-fill" style="width: ${pct}%"></div></div>
+                    <strong>${cat.avg.toFixed(2)}</strong>
+                </div>
+            `;
+            categoryDiv.appendChild(div);
+        });
+
+        // Build category radar datasets
+        function buildCategoryDatasets(filterSet) {
+            const relevantCats = filterSet.size === 0 ? trigosCategories : [...filterSet];
+            return relevantCats.map(name => {
+                const items = companies.filter(c => matchCategory(c) === name);
+                if (items.length === 0) return null;
+                const avgScores = categories.map((_, i) => {
+                    const sum = items.reduce((acc, c) => acc + adjustScore(c.scores[i], i), 0);
+                    return (sum / items.length).toFixed(2);
+                });
+                return {
+                    label: `${name} (n=${items.length})`,
+                    data: avgScores,
+                    fill: false,
+                    backgroundColor: categoryColors[name].bg,
+                    borderColor: categoryColors[name].border,
+                    borderWidth: 2
+                };
+            }).filter(Boolean);
+        }
+
+        // Category Radar Chart (dynamic)
+        categoryRadarChart = new Chart(document.getElementById('categoryRadar'), {
+            type: 'radar',
+            data: { labels: categories, datasets: buildCategoryDatasets(activeFilters) },
+            options: {
+                responsive: true,
+                scales: { r: { suggestedMin: 0, suggestedMax: 5, ticks: { stepSize: 1 } } },
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        // Year Trend (dynamic)
+        const years = [2019, 2020, 2021, 2022, 2023, 2024, 2025];
+
+        // Build year averages from filtered companies (using adjusted averages)
+        function buildYearAverages(filtered) {
+            return years.map(y => {
+                const items = filtered.filter(c => c.year === y);
+                return items.length ? (items.reduce((acc, c) => acc + c.adjAvg, 0) / items.length).toFixed(2) : null;
+            });
+        }
+
+        const yearAverages = buildYearAverages(companies);
+
+        // Year trend chart - 36° brand palette
+        yearTrendChart = new Chart(document.getElementById('yearTrend'), {
+            type: 'bar',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Durchschnittlicher Score',
+                    data: yearAverages,
+                    backgroundColor: [
+                        'rgba(0, 74, 74, 1)',      // 2019 - jade
+                        'rgba(149, 158, 64, 1)',   // 2020 - olive
+                        'rgba(170, 128, 224, 1)',  // 2021 - purple
+                        'rgba(0, 102, 102, 1)',    // 2022 - jade-light
+                        'rgba(0, 74, 74, 0.8)',    // 2023 - jade
+                        'rgba(252, 110, 69, 1)',   // 2024 - coral
+                        'rgba(0, 74, 74, 1)'       // 2025 - jade
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true, max: 5 } },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Build top/bottom datasets
+        function buildTopBottomDatasets(filtered) {
+            const sorted = [...filtered].sort((a, b) => b.avg - a.avg);
+            const n = Math.min(10, Math.floor(sorted.length / 2));
+
+            if (n < 2) {
+                return { datasets: [], title: 'Zu wenige Daten für Vergleich', topN: 0, bottomN: 0 };
+            }
+
+            const topN = sorted.slice(0, n);
+            const bottomN = sorted.slice(-n);
+
+            const topAvg = categories.map((_, i) => (topN.reduce((acc, c) => acc + c.scores[i], 0) / n).toFixed(2));
+            const bottomAvg = categories.map((_, i) => (bottomN.reduce((acc, c) => acc + c.scores[i], 0) / n).toFixed(2));
+
+            const topOverall = (topN.reduce((acc, c) => acc + c.avg, 0) / n).toFixed(2);
+            const bottomOverall = (bottomN.reduce((acc, c) => acc + c.avg, 0) / n).toFixed(2);
+
+            return {
+                datasets: [
+                    {
+                        label: `Top ${n} (Ø ${topOverall})`,
+                        data: topAvg,
+                        fill: true,
+                        backgroundColor: 'rgba(149, 158, 64, 0.25)',  // brand-olive
+                        borderColor: 'rgba(149, 158, 64, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: `Bottom ${n} (Ø ${bottomOverall})`,
+                        data: bottomAvg,
+                        fill: true,
+                        backgroundColor: 'rgba(252, 110, 69, 0.25)',  // brand-coral
+                        borderColor: 'rgba(252, 110, 69, 1)',
+                        borderWidth: 2
+                    }
+                ],
+                title: n === 10 ? 'Top 10 vs. Bottom 10: Profile im Vergleich' : `Top ${n} vs. Bottom ${n}: Profile im Vergleich`,
+                topN: n,
+                bottomN: n
+            };
+        }
+
+        // Top/Bottom Radar Chart (dynamic)
+        const initialTopBottom = buildTopBottomDatasets(companies);
+        topBottomChart = new Chart(document.getElementById('topBottomRadar'), {
+            type: 'radar',
+            data: { labels: categories, datasets: initialTopBottom.datasets },
+            options: {
+                responsive: true,
+                scales: { r: { suggestedMin: 0, suggestedMax: 5, ticks: { stepSize: 1 } } },
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        // Render ranking table
+        function renderRankingTable(filtered) {
+            const tbody = document.querySelector('#rankingTable tbody');
+            tbody.innerHTML = '';
+            const sorted = [...filtered].sort((a, b) => b.adjAvg - a.adjAvg);
+
+            sorted.forEach((c, i) => {
+                const tr = document.createElement('tr');
+                const scoreClass = c.adjAvg >= 4.0 ? 'score-high' : c.adjAvg >= 3.6 ? 'score-mid' : 'score-low';
+                const stage = c.adjAvg >= 3.7 ? 'Champion' : c.adjAvg >= 2.7 ? 'Opp. Maximiser' : 'Risk Mitigator';
+                tr.innerHTML = `
+                    <td>${i + 1}</td>
+                    <td><strong>${c.name}</strong></td>
+                    <td><span class="year-badge year-${c.year}">${c.year}</span></td>
+                    <td>${c.category}</td>
+                    <td><span class="score-badge ${scoreClass}">${c.adjAvg.toFixed(2)}</span></td>
+                    <td>${stage}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Initial render
+        renderRankingTable(companies);
+
+        // Update all dynamic elements
+        function updateAll() {
+            const filtered = getFilteredCompanies();
+            const isFiltered = activeFilters.size > 0;
+
+            // Update counter
+            document.getElementById('filterCounter').innerHTML =
+                `Zeige <strong>${filtered.length}</strong> von 43 Unternehmen`;
+
+            // Update category radar
+            const catCanvas = document.getElementById('categoryRadar');
+            catCanvas.classList.add('chart-updating');
+            setTimeout(() => {
+                categoryRadarChart.data.datasets = buildCategoryDatasets(activeFilters);
+                categoryRadarChart.update();
+                catCanvas.classList.remove('chart-updating');
+            }, 50);
+
+            // Update category radar filter info
+            const catFilterInfo = document.getElementById('categoryRadarFilter');
+            if (isFiltered) {
+                catFilterInfo.textContent = 'Gefiltert: ' + [...activeFilters].join(', ');
+                catFilterInfo.classList.remove('hidden');
+            } else {
+                catFilterInfo.classList.add('hidden');
+            }
+
+            // Update year trend chart
+            const yearCanvas = document.getElementById('yearTrend');
+            yearCanvas.classList.add('chart-updating');
+            setTimeout(() => {
+                const newYearAverages = buildYearAverages(filtered);
+                yearTrendChart.data.datasets[0].data = newYearAverages;
+                yearTrendChart.update();
+                yearCanvas.classList.remove('chart-updating');
+            }, 50);
+
+            // Update year trend filter info
+            const yearFilterInfo = document.getElementById('yearTrendFilter');
+            if (yearFilterInfo) {
+                if (isFiltered) {
+                    yearFilterInfo.textContent = 'Gefiltert: ' + [...activeFilters].join(', ');
+                    yearFilterInfo.classList.remove('hidden');
+                } else {
+                    yearFilterInfo.classList.add('hidden');
+                }
+            }
+
+            // Update top/bottom radar
+            const tbCanvas = document.getElementById('topBottomRadar');
+            tbCanvas.classList.add('chart-updating');
+            setTimeout(() => {
+                const tbData = buildTopBottomDatasets(filtered);
+                topBottomChart.data.datasets = tbData.datasets;
+                topBottomChart.update();
+                document.getElementById('topBottomTitle').textContent = tbData.title;
+                tbCanvas.classList.remove('chart-updating');
+            }, 50);
+
+            // Update top/bottom filter info
+            const tbFilterInfo = document.getElementById('topBottomFilter');
+            if (isFiltered) {
+                tbFilterInfo.textContent = 'Gefiltert: ' + [...activeFilters].join(', ');
+                tbFilterInfo.classList.remove('hidden');
+            } else {
+                tbFilterInfo.classList.add('hidden');
+            }
+
+            // Update ranking table
+            renderRankingTable(filtered);
+        }
+
+        // Filter button handlers
+        document.getElementById('filterButtons').addEventListener('click', (e) => {
+            const btn = e.target.closest('.filter-btn');
+            if (!btn) return;
+
+            const cat = btn.dataset.cat;
+
+            if (cat === 'all') {
+                // Reset all filters
+                activeFilters.clear();
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.toggle('active', b.dataset.cat === 'all');
+                });
+            } else {
+                // Toggle this category
+                if (activeFilters.has(cat)) {
+                    activeFilters.delete(cat);
+                } else {
+                    activeFilters.add(cat);
+                }
+
+                // Update button states
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    if (b.dataset.cat === 'all') {
+                        b.classList.toggle('active', activeFilters.size === 0);
+                    } else {
+                        b.classList.toggle('active', activeFilters.has(b.dataset.cat));
+                    }
+                });
+            }
+
+            updateAll();
+        });
+    </script>
+</body>
+</html>

@@ -96,8 +96,10 @@ esg-maturity-agent/
 │   ├── ainsbury_grayson_top-level_categories.md
 │   └── [weitere Forschungsmaterialien]
 ├── templates/                               # HTML-Report-Templates
-│   ├── bericht_template.html                # HTML-Template mit Radar-Diagramm
-│   └── bericht_demo.html                    # Demo-Bericht (Muster GmbH)
+│   └── bericht_template.html                # HTML-Template mit Radar-Diagramm
+├── examples/                                # Beispiel-Analysen (auf GitHub Pages)
+│   ├── bericht_demo.html                    # Demo-Bericht (Muster GmbH)
+│   └── trigos_example.html                  # TRIGOS-Gewinner 2019-2025 Vergleich
 ├── input/                                   # Kundenmaterial für Analysen (lokal)
 │   └── README.md                            # Anleitung für Input-Materialien
 ├── output/                                  # Generierte Analyseberichte (lokal)
@@ -202,15 +204,18 @@ Siehe `input/README.md` für detaillierte Anleitung.
 
 `output/` - Directory for generated analysis reports and assessments
 
-## GitHub Pages & Live Demo
+## GitHub Pages & Beispiele
 
-Der Demo-Bericht ist automatisch unter GitHub Pages verfügbar:
+Beispiel-Analysen sind unter GitHub Pages verfügbar:
 
-**Live-Demo:** <https://romanmesicek.github.io/esg-maturity-agent/templates/bericht_demo.html>
+**Demo-Bericht:** <https://romanmesicek.github.io/esg-maturity-agent/examples/bericht_demo.html>
+
+**TRIGOS-Vergleichsanalyse:** <https://romanmesicek.github.io/esg-maturity-agent/examples/trigos_example.html>
+Umfassende Analyse aller 43 TRIGOS-Gewinner von 2019 bis 2025 nach dem Ainsbury-Grayson-Modell. Zeigt die Anwendung des ESG Maturity Agents für vergleichende Analysen über mehrere Unternehmen hinweg.
 
 ### Automatisches Deployment
 
-Das Repository enthält einen GitHub Actions Workflow (`.github/workflows/deploy-pages.yml`), der bei jedem Push auf den `main` Branch automatisch die GitHub Pages aktualisiert. Änderungen am Demo-Bericht oder Templates werden somit automatisch live geschaltet.
+Das Repository enthält einen GitHub Actions Workflow (`.github/workflows/deploy-pages.yml`), der bei jedem Push auf den `main` Branch automatisch die GitHub Pages aktualisiert. Änderungen an den Beispiel-Berichten werden somit automatisch live geschaltet.
 
 **Setup (einmalig in GitHub):**
 

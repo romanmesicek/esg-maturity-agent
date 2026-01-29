@@ -29,8 +29,8 @@ input/*
 # Skills
 skills/
 
-# Claude agents (private)
+# Claude agents (confidential)
 .claude/
 
 # Development plans (confidential)
-docs/DEVELOPMENT_PLAN.md
+plans/

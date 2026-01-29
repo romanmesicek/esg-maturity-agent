@@ -117,18 +117,19 @@ Der Agent generiert in `output/[firmenname]_[datum]/`:
 - `[firmenname]_greenwashing_screening.md` - Separates Greenwashing-Screening mit Red Flag-Analyse
 - `[firmenname]_analyse_bericht.html` - Formatierter Bericht mit interaktivem Radar-Diagramm
 
-### Demo-Beispiel
+### Beispiele
 
-Ein Beispiel-Bericht für ein anonymes Musterunternehmen ist verfügbar:
+**[Demo-Bericht](https://romanmesicek.github.io/esg-maturity-agent/examples/bericht_demo.html)** - Beispiel-Bericht für ein anonymes Musterunternehmen mit allen Funktionen:
 
-**[Live-Demo ansehen](https://romanmesicek.github.io/esg-maturity-agent/templates/bericht_demo.html)**
-
-Dieses Demo zeigt alle Funktionen des generierten Berichts:
 - Interaktives Radar-Diagramm mit allen 11 Kategorien
 - Executive Summary und Unternehmensprofil
 - Detailbewertung mit Konfidenz-Indikatoren
 - Top 3 Stärken und Entwicklungspotenziale
 - Branchenvergleich mit Wettbewerbern
+
+**[TRIGOS-Vergleichsanalyse 2019-2025](https://romanmesicek.github.io/esg-maturity-agent/examples/trigos_example.html)** - Umfassende Analyse aller 43 TRIGOS-Gewinner von 2019 bis 2025 nach dem Ainsbury-Grayson-Modell. Zeigt die Anwendung des ESG Maturity Agents für vergleichende Analysen über mehrere Unternehmen hinweg.
+
+
 
 ## Akademische Grundlage
 
