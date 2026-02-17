@@ -637,7 +637,7 @@ rne<!DOCTYPE html>
             data: {
                 labels: categories,
                 datasets: [{
-                    label: 'Durchschnitt (n=43)',
+                    label: 'Durchschnitt',
                     data: categoryAverages,
                     fill: true,
                     backgroundColor: 'rgba(0, 74, 74, 0.25)',
@@ -683,7 +683,7 @@ rne<!DOCTYPE html>
                     return (sum / items.length).toFixed(2);
                 });
                 return {
-                    label: `${name} (n=${items.length})`,
+                    label: `${name}`,
                     data: avgScores,
                     fill: false,
                     backgroundColor: categoryColors[name].bg,
